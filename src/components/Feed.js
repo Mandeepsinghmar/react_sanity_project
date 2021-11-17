@@ -21,16 +21,10 @@ const Feed = () => {
       setPins(data);
     });
   }, []);
-  console.log(pins);
 
   return (
-    <div
-      className='flex flex-wrap gap-4 justify-center'
-      style={{ counterReset: 'items', flexBasis: '100%' }}
-    >
-      {pins?.map((pin) => (
-        <Pin key={pin._id} pin={pin} />
-      ))}
+    <div className='flex flex-wrap gap-4 justify-center' style={{ counterReset: 'items', flexBasis: '100%' }}>
+      {pins?.map((pin) => <Pin key={pin._id} pin={pin} />)}
     </div>
   );
 };

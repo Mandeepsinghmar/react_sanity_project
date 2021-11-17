@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { basename } from 'path';
 import { createReadStream } from 'fs';
+
 import { client } from '../client';
 
 const CreatePin = () => {
@@ -46,6 +47,7 @@ const CreatePin = () => {
       setFields(true);
     }
   };
+  
   return (
     <div className='h-90vh flex justify-center items-center mt-10 sm:-mt-20'>
       <div className=' flex flex-wrap justify-center items-center bg-white sm:p-10 p-2'>

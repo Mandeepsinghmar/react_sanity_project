@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MdMoreHoriz } from 'react-icons/md';
 import { FiShare } from 'react-icons/fi';
+
 import { urlFor } from '../client';
 
-const Pin = ({ pin }) => {
+const Pin = ({ pin: { about, pinImage } }) => {
   const [postHovered, setPostHovered] = useState(false);
-  const { about, pinImage } = pin;
+
   return (
     <div>
       <Link to='/post-detail'>
@@ -25,10 +26,7 @@ const Pin = ({ pin }) => {
           />
           <p>{about}</p>
           {postHovered && (
-            <div
-              className='absolute top-0 w-full h-full flex flex-col justify-between p-3'
-              style={{ height: '100%' }}
-            >
+            <div className='absolute top-0 w-full h-full flex flex-col justify-between p-3' style={{ height: '100%' }}>
               <div className='flex items-center justify-between'>
                 <button className='bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100'>
                   <FiShare />
@@ -49,13 +47,8 @@ const Pin = ({ pin }) => {
           )}
         </div>
       </Link>
-
       <Link to='/user-profile' className='flex gap-2 mt-2'>
-        <img
-          className='w-8 h-8 rounded-full'
-          src='https://i.pinimg.com/236x/6f/d8/e0/6fd8e04bc9620686b6527b70a32b79e7.jpg'
-          alt='user-profile'
-        />
+        <img className='w-8 h-8 rounded-full' src='https://i.pinimg.com/236x/6f/d8/e0/6fd8e04bc9620686b6527b70a32b79e7.jpg' alt='user-profile' />
         <p className='font-bold'>Mandeep singhmar</p>
       </Link>
     </div>
