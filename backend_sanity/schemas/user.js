@@ -9,16 +9,7 @@ export default {
       title: 'UserName',
       type: 'string',
     },
-    {
-      name: 'displayName',
-      title: 'DisplayName',
-      type: 'string',
-    },
-    {
-      name: 'id',
-      title: 'ID',
-      type: 'number',
-    },
+
     {
       name: 'bio',
       title: 'Bio',
@@ -27,7 +18,7 @@ export default {
     {
       name: 'image',
       title: 'Image',
-      type: 'image',
+      type: 'string',
     },
   ],
 };

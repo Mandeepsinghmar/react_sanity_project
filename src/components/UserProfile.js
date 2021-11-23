@@ -1,45 +1,134 @@
-import React from 'react';
-import { FiShare } from 'react-icons/fi';
-import Feed from './Feed';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineLogout } from 'react-icons/ai';
+import { useParams, useNavigate } from 'react-router-dom';
+import { GoogleLogout } from 'react-google-login';
+import Loader from 'react-loader-spinner';
 
-const UserProfile = () => {
+import { client } from '../client';
+import MasonryLayout from './MasonryLayout';
+import Share from './Share';
+
+const UserProfile = function () {
+  const [user, setUser] = useState();
+  const [pins, setPins] = useState();
+  const [text, setText] = useState('Created');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const User = JSON.parse(localStorage.getItem('user'));
+
+  const { userId } = useParams();
+  const query = `*[_type == "user" && _id == '${userId}']`;
+
+  useEffect(() => {
+    client.fetch(query).then((data) => {
+      setUser(data[0]);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (text === 'Created') {
+      const query1 = `*[ _type == 'pin' && userId == '${userId}']{
+        pinImage,
+        _id,
+        destination,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+      }`;
+      client.fetch(query1).then((data) => {
+        setPins(data);
+      });
+    } else {
+      const query2 = `*[_type == "pin" && _id == '${userId}']`;
+      client.fetch(query2).then((data) => {
+        setPins(data);
+      });
+    }
+  }, [text]);
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <div>
-      <div className='lg:w-656 m-auto'>
+      {modalIsOpen && (
         <div>
-          <img
-            className='rounded-lg lg:w-656 h-370 m-auto '
-            src='https://i.pinimg.com/236x/6f/d8/e0/6fd8e04bc9620686b6527b70a32b79e7.jpg'
-            alt='user-post'
-          />
-          <img
-            className='rounded-full w-28 h-28 m-auto -mt-14 '
-            src='https://i.pinimg.com/236x/6f/d8/e0/6fd8e04bc9620686b6527b70a32b79e7.jpg'
-            alt='user-post'
+          <Share
+            url={`user-profile/${userId}`}
+            modalIsOpen={modalIsOpen}
+            setModalIsOpen={setModalIsOpen}
           />
         </div>
-        <div className='text-center mt-3'>
-          <h1 className='font-bold text-3xl'>Mandeep Singhmar</h1>
-          <p className='mt-2'>@mandeepsinghmar</p>
+      )}
+      {user ? (
+        <div className="lg:w-656 m-auto">
+          <div>
+            <img
+              className="rounded-lg lg:w-656 h-370 m-auto "
+              src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900"
+              alt="user-pic"
+            />
+            <img
+              className="rounded-full w-28 h-28 m-auto -mt-14 "
+              src={user.image}
+              alt="user-pic"
+            />
+          </div>
+          <h1 className="font-bold text-3xl text-center mt-3">
+            {user.userName}
+          </h1>
+          <div className="flex items-center justify-center gap-4 mt-5 mb-4">
+            <button
+              type="button"
+              onClick={() => setModalIsOpen(true)}
+              className="bg-red-500 text-white font-bold p-2 rounded-full w-16 "
+            >
+              Share
+            </button>
+            {userId === User.googleId && (
+              <GoogleLogout
+                clientId="820339122389-20j5josq7739gtnk2giki5ttl43t8nbd.apps.googleusercontent.com"
+                onLogoutSuccess={logout}
+              >
+                <button type="button" className="text-2xl">
+                  <AiOutlineLogout />
+                </button>
+              </GoogleLogout>
+            )}
+          </div>
+          <div className="text-center mb-5">
+            <button
+              type="button"
+              onClick={(e) => setText(e.target.textContent)}
+              className="bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 "
+            >
+              Created
+            </button>
+            <button
+              type="button"
+              onClick={(e) => setText(e.target.textContent)}
+              className="bg-red-500 text-white font-bold p-2 rounded-full w-20 "
+            >
+              Saved
+            </button>
+          </div>
         </div>
-        <div className='flex items-center justify-center gap-4 mt-5 mb-4'>
-          <button className='text-2xl p-2 rounded-full w-10 h-10 font-extrabold flex items-center justify-center text-dark opacity-75 hover:opacity-100'>
-            <FiShare />
-          </button>
-          <button className='bg-red-500 text-white font-bold p-2 rounded-full w-16 '>
-            Follow
-          </button>
+      ) : (
+        <div className="flex flex-col justify-center items-center w-full">
+          <Loader
+            type="Circles"
+            color="#00BFFF"
+            height={50}
+            width={200}
+            className="m-5"
+          />
         </div>
-        <div className='text-center mb-5'>
-          <button className='bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 '>
-            Created
-          </button>
-          <button className='bg-red-500 text-white font-bold p-2 rounded-full w-20 '>
-            Saved
-          </button>
-        </div>
-      </div>
-      <Feed />
+      )}
+      <MasonryLayout pins={pins} />
     </div>
   );
 };
