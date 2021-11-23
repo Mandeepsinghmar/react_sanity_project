@@ -95,7 +95,6 @@ const CreatePin = function () {
       setFields(true);
     }
   };
-  console.log(categories);
   return (
     <div className="h-90vh flex justify-center items-center mt-10 sm:-mt-20">
       <div className=" flex flex-wrap justify-center items-center bg-white sm:p-10 p-2">

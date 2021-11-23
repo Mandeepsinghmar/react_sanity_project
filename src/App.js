@@ -6,16 +6,8 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import TopNavbar from './components/TopNavbar';
-import SideNavbar from './components/SideNavbar';
-import Feed from './components/Feed';
-import PinDetail from './components/PinDetail';
-import UserProfile from './components/UserProfile';
-import CreatePin from './components/CreatePin';
-import Login from './components/Login';
-import Search from './components/Search';
+import { Login, Search, TopNavbar, SideNavbar, Feed, PinDetail, UserProfile, CreatePin } from './components';
 
-// eslint-disable-next-line func-names
 const Routing = function () {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');

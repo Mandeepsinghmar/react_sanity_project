@@ -6,7 +6,6 @@ import MasonryLayout from './MasonryLayout';
 
 const Feed = function () {
   const [pins, setPins] = useState();
-  const date = new Date();
   useEffect(() => {
     const query = `*[_type == "pin"] | order(_createdAt desc) {
           pinImage,

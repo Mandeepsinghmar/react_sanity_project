@@ -24,7 +24,6 @@ const Recent = function () {
       setPins(data);
     });
   }, []);
-  console.log(pins);
   if (!pins) {
     return <Spinner />;
   }
