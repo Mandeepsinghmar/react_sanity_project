@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/types": "^7.16.0",
     "@craco/craco": "^6.4.0",
     "@sanity/client": "^2.21.10",
     "@sanity/image-url": "^1.0.1",
@@ -21,6 +22,7 @@
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-share-social": "^0.1.48",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -49,7 +51,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.8",
-    "eslint": "^8.3.0",
+    "eslint": "^7.11.0",
     "eslint-config-airbnb": "^19.0.1",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",

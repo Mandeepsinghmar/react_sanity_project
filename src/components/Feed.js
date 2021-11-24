@@ -10,11 +10,20 @@ const Feed = function () {
     const query = `*[_type == "pin"] | order(_createdAt desc) {
           pinImage,
           _id,
+          
           destination,
           postedBy->{
             _id,
             userName,
             image
+          },
+          save[]{
+            _key,
+            postedBy->{
+              _id,
+              userName,
+              image
+            },
           },
         } `;
 
@@ -22,7 +31,7 @@ const Feed = function () {
       setPins(data);
     });
   }, []);
-
+  console.log(pins);
   if (!pins) {
     return (
       <div className="flex flex-col justify-center items-center w-full m-5">

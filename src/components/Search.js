@@ -28,7 +28,7 @@ const Search = function ({ searchTerm, setSearchTerm }) {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-3 mb-10">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
         {categories.map((category) => (
           <div
             className="relative cursor-pointer"

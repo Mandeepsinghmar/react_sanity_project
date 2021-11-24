@@ -10,6 +10,7 @@ module.exports = {
         275: '275px',
         300: '300px',
         340: '340px',
+        350: '350px',
         656: '656px',
         880: '880px',
         508: '508px',
@@ -22,6 +23,9 @@ module.exports = {
         685: '685px',
         800: '800px',
         '90vh': '90vh',
+      },
+      maxHeight: {
+        370: '370px',
       },
       textColor: {
         lightGray: '#F1EFEE',

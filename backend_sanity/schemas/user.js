@@ -9,12 +9,6 @@ export default {
       title: 'UserName',
       type: 'string',
     },
-
-    {
-      name: 'bio',
-      title: 'Bio',
-      type: 'string',
-    },
     {
       name: 'image',
       title: 'Image',

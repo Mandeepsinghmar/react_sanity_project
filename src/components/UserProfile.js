@@ -23,7 +23,7 @@ const UserProfile = function () {
     client.fetch(query).then((data) => {
       setUser(data[0]);
     });
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
     if (text === 'Created') {
@@ -36,22 +36,48 @@ const UserProfile = function () {
           userName,
           image
         },
+        save[]{
+          postedBy->{
+            _id,
+            userName,
+            image
+          },
+        },
       }`;
       client.fetch(query1).then((data) => {
         setPins(data);
       });
     } else {
-      const query2 = `*[_type == "pin" && _id == '${userId}']`;
+      const query2 = `*[_type == 'pin' && '${userId}' in save[].userId]{
+        pinImage,
+        _id,
+        destination,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+        save[]{
+          postedBy->{
+            _id,
+            userName,
+            image
+          },
+        },
+      }`;
       client.fetch(query2).then((data) => {
         setPins(data);
       });
     }
-  }, [text]);
+  }, [text, userId]);
 
   const logout = () => {
+    console.log('logout');
     localStorage.clear();
     navigate('/login');
   };
+
+  console.log(user, pins);
 
   return (
     <div>
@@ -61,6 +87,7 @@ const UserProfile = function () {
             url={`user-profile/${userId}`}
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}
+            title="Profile"
           />
         </div>
       )}
@@ -92,12 +119,21 @@ const UserProfile = function () {
             {userId === User.googleId && (
               <GoogleLogout
                 clientId="820339122389-20j5josq7739gtnk2giki5ttl43t8nbd.apps.googleusercontent.com"
+                render={(renderProps) => (
+                  <button
+                    type="button"
+                    className="bg-white p-2 text-2xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                  >
+                    <AiOutlineLogout />
+                  </button>
+                )}
                 onLogoutSuccess={logout}
-              >
-                <button type="button" className="text-2xl">
-                  <AiOutlineLogout />
-                </button>
-              </GoogleLogout>
+                cookiePolicy="single_host_origin"
+
+              />
+
             )}
           </div>
           <div className="text-center mb-5">
@@ -128,7 +164,14 @@ const UserProfile = function () {
           />
         </div>
       )}
-      <MasonryLayout pins={pins} />
+      {pins?.length > 0 ? (
+
+        <MasonryLayout pins={pins} />
+      ) : (
+        <div className="flex flex-col justify-center items-center w-full text-3xl mt-10">
+          No Pins Found!
+        </div>
+      )}
     </div>
   );
 };

@@ -33,11 +33,11 @@ const TopNavbar = function ({ setSearchTerm, searchTerm }) {
               <Link
                 to={`user-profile/${user?.googleId}`}
               >
-                <img src={user.imageUrl} alt="user-pic" className="w-16 h-12 rounded-lg " />
+                <img src={user.imageUrl} alt="user-pic" className="w-14 h-12 rounded-lg " />
               </Link>
               <Link
                 to="/create-pin"
-                className="p-4 bg-black text-white rounded-lg"
+                className="bg-black text-white rounded-lg w-14 h-12 flex justify-center items-center"
               >
                 <IoMdAdd />
               </Link>

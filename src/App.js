@@ -26,16 +26,12 @@ const Routing = function () {
       </div>
 
       <div
-        style={{
-          paddingRight: '10px',
-          flex: '1',
-        }}
-        className="ml-2 sm:ml-320"
+        className="ml-2 sm:ml-320 pr-2 flex-1"
       >
         <div className="bg-mainColor">
           <TopNavbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
-        <div style={{ minHeight: '99vh' }}>
+        <div style={{ minHeight: '95vh' }}>
           <Routes>
             <Route exact path="/" element={<Feed />} />
             <Route path="/pin-detail/:pinId" element={<PinDetail />} />

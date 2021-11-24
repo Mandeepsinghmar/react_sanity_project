@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { AiFillClockCircle } from 'react-icons/ai';
 import { RiHomeFill } from 'react-icons/ri';
+import { BiLogInCircle } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 
 const SideNavbar = function () {
@@ -20,24 +21,41 @@ const SideNavbar = function () {
       </Link>
       <div className="flex flex-col justify-between items-start h-800 ">
         <div className="flex flex-col gap-5">
-          <NavLink
-            to={user ? '/' : '/login'}
-            className={({ isActive }) => (isActive
-              ? 'flex items-center gap-3 font-extrabold '
-              : 'flex items-center gap-3 text-gray-500')}
-          >
-            <RiHomeFill />
-            Home
-          </NavLink>
-          <NavLink
-            to={user ? 'pin-detail' : '/login'}
-            className={({ isActive }) => (isActive
-              ? 'flex items-center gap-3 font-black'
-              : 'flex items-center gap-3 text-gray-500 ')}
-          >
-            <AiFillClockCircle />
-            Recent
-          </NavLink>
+          {
+            user ? (
+              <>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) => (isActive
+                    ? 'flex items-center gap-3 font-extrabold '
+                    : 'flex items-center gap-3 text-gray-500')}
+                >
+                  <RiHomeFill />
+                  Home
+                </NavLink>
+                <NavLink
+                  to="/pin-detail"
+                  className={({ isActive }) => (isActive
+                    ? 'flex items-center gap-3 font-black'
+                    : 'flex items-center gap-3 text-gray-500 ')}
+                >
+                  <AiFillClockCircle />
+                  Recent
+                </NavLink>
+              </>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) => (isActive
+                  ? 'flex items-center gap-3 font-extrabold '
+                  : 'flex items-center gap-3 text-gray-500')}
+              >
+                <BiLogInCircle />
+                Login
+              </NavLink>
+            )
+          }
+
         </div>
         {user && (
           <Link

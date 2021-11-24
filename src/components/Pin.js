@@ -1,26 +1,67 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Modal from 'react-modal';
+import { v4 as uuidv4 } from 'uuid';
 import { FiShare } from 'react-icons/fi';
+
+import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
+import { client } from '../client';
 import Share from './Share';
 
 const Pin = function ({ pin }) {
   const [postHovered, setPostHovered] = useState(false);
-  const navigate = useNavigate();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [savingPost, setSavingPost] = useState(false);
+
+  const navigate = useNavigate();
 
   const { postedBy, pinImage, _id, destination } = pin;
+
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  const deletePin = (id) => {
+    client
+      .delete(id)
+      .then(() => {
+        window.location.reload();
+      });
+  };
+  const alreadySaved = pin?.save?.filter((item) => item.postedBy._id === user.googleId);
+  const savePin = (id) => {
+    if (alreadySaved) {
+      setSavingPost(true);
+
+      client
+        .patch(id)
+        .setIfMissing({ save: [] })
+        .insert('after', 'save[-1]', [{
+          _key: uuidv4(),
+          userId: user.googleId,
+          postedBy: {
+            _type: 'postedBy',
+            _ref: user.googleId,
+          },
+        }])
+        .commit()
+        .then(() => {
+          console.log('pin saved');
+          window.location.reload();
+          setSavingPost(false);
+        });
+    }
+  };
+
   return (
     <div className="m-2">
       {modalIsOpen && (
         <div>
-          <p className="text-xl font-semibold mb-2">Send this Pin</p>
+
           <Share
             url={`pin-detail/${_id}`}
             modalIsOpen={modalIsOpen}
             setModalIsOpen={setModalIsOpen}
+            title="Pin"
           />
         </div>
       )}
@@ -56,9 +97,29 @@ const Pin = function ({ pin }) {
               >
                 <FiShare />
               </button>
-              <button type="button" className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-16 ">
-                Save
-              </button>
+
+              {
+           alreadySaved ? (
+             <button
+               type="button"
+               className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
+             >
+               Saved
+             </button>
+           ) : (
+             <button
+               onClick={(e) => {
+                 e.stopPropagation();
+                 savePin(_id);
+               }}
+               type="button"
+               className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
+             >
+               {savingPost ? 'Saving' : 'Save'}
+             </button>
+           )
+}
+
             </div>
             <div className=" flex justify-between items-center gap-2 w-full">
               {destination?.slice(8).length > 0 ? (
@@ -73,15 +134,21 @@ const Pin = function ({ pin }) {
                   {destination?.slice(8)}{' '}
                 </a>
               ) : undefined}
+              {
+           postedBy?._id === user.googleId && (
+           <button
+             type="button"
+             onClick={(e) => {
+               e.stopPropagation();
+               deletePin(_id);
+             }}
+             className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+           >
+             <AiTwotoneDelete />
+           </button>
+           )
+        }
 
-              {/* <div className='flex gap-2'>
-                <button className='bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100'>
-                  <FiShare />
-                </button>
-                <button className='bg-white rounded-full p-2 w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100'>
-                  <MdMoreHoriz />
-                </button>
-              </div> */}
             </div>
           </div>
         )}

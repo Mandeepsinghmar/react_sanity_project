@@ -96,7 +96,7 @@ const CreatePin = function () {
     }
   };
   return (
-    <div className="h-90vh flex justify-center items-center mt-10 sm:-mt-20">
+    <div className=" flex justify-center items-center mt-10 lg:mt-20">
       <div className=" flex flex-wrap justify-center items-center bg-white sm:p-10 p-2">
         <div className="bg-secondaryColor p-3 w-340">
           <div className=" border-2 border-dotted border-gray-300 p-3">
@@ -149,7 +149,7 @@ const CreatePin = function () {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-6 pl-10 mt-5">
+        <div className="flex flex-col gap-6 lg:pl-10 mt-5">
           <input
             type="text"
             value={title}

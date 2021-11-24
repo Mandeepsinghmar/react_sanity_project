@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleLogin from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 
 import { client } from '../client';
 
@@ -34,7 +35,16 @@ const Login = function () {
         <div className="absolute bottom-40">
           <GoogleLogin
             clientId="820339122389-20j5josq7739gtnk2giki5ttl43t8nbd.apps.googleusercontent.com"
-            buttonText="Sign In With Google"
+            render={(renderProps) => (
+              <button
+                type="button"
+                className="bg-white p-2 pl-4 pr-4 text-2xl w-300 rounded-3xl flex items-center justify-center text-dark  hover:opacity-95"
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <FcGoogle className="mr-4" /> Sign in with google
+              </button>
+            )}
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
             cookiePolicy="single_host_origin"

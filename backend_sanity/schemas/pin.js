@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   name: 'pin',
   title: 'Pin',
@@ -52,7 +51,7 @@ export default {
       name: 'save',
       title: 'Save',
       type: 'array',
-      of: [{ type: 'postedBy' }],
+      of: [{ type: 'save' }],
     },
     {
       name: 'comments',

@@ -41,7 +41,8 @@ const style = {
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 };
 const baseUrl = 'http://localhost:3000';
-const Share = function ({ url, modalIsOpen, setModalIsOpen }) {
+const Share = function ({ url, modalIsOpen, setModalIsOpen, title }) {
+  Modal.setAppElement('#root');
   return (
     <div>
       <Modal
@@ -50,6 +51,7 @@ const Share = function ({ url, modalIsOpen, setModalIsOpen }) {
         style={customStyles}
         contentLabel="Example Modal"
       >
+        <p className="text-xl font-semibold mb-2">Send this {title}</p>
         <ShareSocial
           style={style}
           url={`${baseUrl}/${url}`}
