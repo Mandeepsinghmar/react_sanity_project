@@ -12,9 +12,11 @@ const PinDetail = function () {
   const { pinId } = useParams();
   const [pins, setPins] = useState();
   const [pinDetail, setPinDetail] = useState();
-  const [comment, setComment] = useState();
-  const user = JSON.parse(localStorage.getItem('user'));
+  const [comment, setComment] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [addingComment, setAddingComment] = useState(false);
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const fetchPinDetails = () => {
     const query = `*[_type == "pin" && _id == '${pinId}']{
@@ -74,6 +76,7 @@ const PinDetail = function () {
 
   const addComment = () => {
     if (comment !== '') {
+      setAddingComment(true);
       client
         .patch(pinId)
         .setIfMissing({ comments: [] })
@@ -89,6 +92,7 @@ const PinDetail = function () {
         .then(() => {
           fetchPinDetails();
           setComment('');
+          setAddingComment(false);
           console.log('comment saved');
         });
     }
@@ -193,7 +197,7 @@ const PinDetail = function () {
                 className="bg-red-500 text-white rounded-full p-2 pl-3 pr-3 font-semibold"
                 onClick={addComment}
               >
-                Done
+                {addingComment ? 'Doing...' : 'Done'}
               </button>
             </div>
           </div>

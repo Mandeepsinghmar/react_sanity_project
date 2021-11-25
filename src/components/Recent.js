@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
-import Spinner from './Spinner';
 
 const Recent = function () {
   const [pins, setPins] = useState();
   const date = new Date();
   useEffect(() => {
-    const query = `*[_type == "pin" ]{
+    const query = `*[_type == "pin"][0...10]{
           pinImage,
           _id,
           _createdAt,
@@ -18,15 +17,22 @@ const Recent = function () {
             userName,
             image
           },
+          save[]{
+            _key,
+            postedBy->{
+              _id,
+              userName,
+              image
+            },
+          },
         }`;
 
     client.fetch(query).then((data) => {
       setPins(data);
+      console.log(data);
     });
   }, []);
-  if (!pins) {
-    return <Spinner />;
-  }
+
   return (
     <div>
       <MasonryLayout pins={pins} />

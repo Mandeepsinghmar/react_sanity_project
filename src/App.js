@@ -6,7 +6,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 
-import { Login, Search, TopNavbar, SideNavbar, Feed, PinDetail, UserProfile, CreatePin } from './components';
+import { Login, Search, TopNavbar, SideNavbar, Feed, PinDetail, UserProfile, CreatePin, Recent } from './components';
 
 const Routing = function () {
   const navigate = useNavigate();
@@ -38,6 +38,7 @@ const Routing = function () {
             <Route path="/user-profile/:userId" element={<UserProfile />} />
             <Route path="/create-pin" element={<CreatePin />} />
             <Route path="login" element={<Login />} />
+            <Route path="recent" element={<Recent />} />
             <Route
               path="/search"
               element={

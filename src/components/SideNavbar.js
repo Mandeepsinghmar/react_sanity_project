@@ -34,7 +34,7 @@ const SideNavbar = function () {
                   Home
                 </NavLink>
                 <NavLink
-                  to="/pin-detail"
+                  to="/recent"
                   className={({ isActive }) => (isActive
                     ? 'flex items-center gap-3 font-black'
                     : 'flex items-center gap-3 text-gray-500 ')}

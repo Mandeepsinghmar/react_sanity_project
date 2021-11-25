@@ -34,7 +34,7 @@ const Login = function () {
         <p className="text-5xl font-semibold mb-4">Sign in to get your ideas</p>
         <div className="absolute bottom-40">
           <GoogleLogin
-            clientId="820339122389-20j5josq7739gtnk2giki5ttl43t8nbd.apps.googleusercontent.com"
+            clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
             render={(renderProps) => (
               <button
                 type="button"

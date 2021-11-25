@@ -19,7 +19,7 @@ const Search = function ({ searchTerm, setSearchTerm }) {
               image
             },
           }`;
-
+      window.scrollTo(100, 100);
       client.fetch(query).then((data) => {
         setPins(data);
       });
@@ -28,7 +28,7 @@ const Search = function ({ searchTerm, setSearchTerm }) {
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-10 ">
         {categories.map((category) => (
           <div
             className="relative cursor-pointer"
@@ -37,9 +37,9 @@ const Search = function ({ searchTerm, setSearchTerm }) {
             <img
               src={category.image}
               alt="category"
-              className="w-36 h-32 rounded-2xl opacity-90"
+              className="w-28 h-32 rounded-2xl object-cover"
             />
-            <p className="text-white text-xl font-bold absolute bottom-2 left-2">
+            <p className="text-white text-xl capitalize font-bold absolute bottom-2 left-2">
               {category.name}
             </p>
           </div>

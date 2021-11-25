@@ -176,7 +176,7 @@ const CreatePin = function () {
             type="url"
             vlaue={destination}
             onChange={(e) => setDestination(e.target.value)}
-            placeholder="Add a destination link - https://hello.com"
+            placeholder="Add a destination link"
             className="outline-none text-lg border-b-2 border-gray-200 p-2"
           />
           {fields && (
@@ -190,8 +190,9 @@ const CreatePin = function () {
                   setCategory(e.target.value);
                 }}
               >
+                <option value="others">Select Category</option>
                 {categories.map((item) => (
-                  <option className="p-2 text-lg" value={item.name}>
+                  <option className="p-2 text-lg capitalize bg-secondaryColor text-black " value={item.name}>
                     {item.name}
                   </option>
                 ))}

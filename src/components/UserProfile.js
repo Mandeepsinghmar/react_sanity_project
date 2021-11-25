@@ -77,7 +77,7 @@ const UserProfile = function () {
     navigate('/login');
   };
 
-  console.log(user, pins);
+  console.log(user, pins, `${process.env.REACT_APP_GOOGLE_API_TOKEN}`);
 
   return (
     <div>
@@ -118,7 +118,7 @@ const UserProfile = function () {
             </button>
             {userId === User.googleId && (
               <GoogleLogout
-                clientId="820339122389-20j5josq7739gtnk2giki5ttl43t8nbd.apps.googleusercontent.com"
+                clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
                 render={(renderProps) => (
                   <button
                     type="button"

@@ -27,10 +27,14 @@ const Pin = function ({ pin }) {
         window.location.reload();
       });
   };
-  const alreadySaved = pin?.save?.filter((item) => item.postedBy._id === user.googleId);
+  let alreadySaved = pin?.save?.filter((item) => item.postedBy._id === user.googleId);
+  alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
+  console.log(alreadySaved?.length);
+
   const savePin = (id) => {
-    if (alreadySaved) {
+    if (alreadySaved?.length === 0) {
       setSavingPost(true);
+      console.log(alreadySaved);
 
       client
         .patch(id)
@@ -99,25 +103,25 @@ const Pin = function ({ pin }) {
               </button>
 
               {
-           alreadySaved ? (
-             <button
-               type="button"
-               className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
-             >
-               Saved
-             </button>
-           ) : (
-             <button
-               onClick={(e) => {
-                 e.stopPropagation();
-                 savePin(_id);
-               }}
-               type="button"
-               className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
-             >
-               {savingPost ? 'Saving' : 'Save'}
-             </button>
-           )
+          (alreadySaved?.length !== 0) ? (
+            <button
+              type="button"
+              className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
+            >
+              {pin?.save?.length}  Saved
+            </button>
+          ) : (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                savePin(_id);
+              }}
+              type="button"
+              className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
+            >
+              {pin?.save?.length}   {savingPost ? 'Saving' : 'Save'}
+            </button>
+          )
 }
 
             </div>
