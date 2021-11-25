@@ -10,7 +10,7 @@ const Search = function ({ searchTerm, setSearchTerm }) {
   useEffect(() => {
     if (searchTerm !== '') {
       const query = `*[_type == "pin" && category == '${searchTerm}']{
-            pinImage,
+            image,
             _id,
             destination,
             postedBy->{

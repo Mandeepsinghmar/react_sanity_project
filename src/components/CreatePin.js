@@ -23,13 +23,14 @@ const CreatePin = function () {
 
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
-
+    setLoading(true);
     // uploading asset to sanity
     client.assets
       .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
       .then((document) => {
         setImageAsset(document);
         console.log('The image was uploaded!', document);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Upload failed:', error.message);
@@ -79,12 +80,13 @@ const CreatePin = function () {
         <div className="bg-secondaryColor p-3 w-340">
           <div className=" border-2 border-dotted border-gray-300 p-3">
             {loading && (
+
               <Loader
                 type="Circles"
                 color="#00BFFF"
                 height={50}
                 width={200}
-                className="m-5"
+                className="m-5 ml-10"
               />
             )}
             {!imageAsset ? (
@@ -112,14 +114,14 @@ const CreatePin = function () {
             ) : (
               <div className="relative">
                 <img
-                  src={imageUrl}
+                  src={imageAsset?.url}
                   alt="uploaded-pic"
                   className="h-510 w-300"
                 />
                 <button
                   type="button"
                   className="absolute top-60 p-3 rounded-full bg-white text-xl cursor-pointer "
-                  // onClick={() => setImageUrl(null)}
+                  onClick={() => setImageAsset(null)}
                 >
                   <MdDelete />
                 </button>
