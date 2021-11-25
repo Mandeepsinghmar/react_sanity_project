@@ -28,7 +28,7 @@ const UserProfile = function () {
   useEffect(() => {
     if (text === 'Created') {
       const query1 = `*[ _type == 'pin' && userId == '${userId}']{
-        pinImage,
+        image,
         _id,
         destination,
         postedBy->{
@@ -49,7 +49,7 @@ const UserProfile = function () {
       });
     } else {
       const query2 = `*[_type == 'pin' && '${userId}' in save[].userId]{
-        pinImage,
+        image,
         _id,
         destination,
         postedBy->{

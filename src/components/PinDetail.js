@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import { v4 as uuidv4 } from 'uuid';
 
-import { client } from '../client';
+import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import Share from './Share';
 
@@ -20,7 +20,7 @@ const PinDetail = function () {
 
   const fetchPinDetails = () => {
     const query = `*[_type == "pin" && _id == '${pinId}']{
-      pinImage,
+      image,
       _id,
       title, 
       about,
@@ -48,12 +48,13 @@ const PinDetail = function () {
         },
       }
     }`;
+
     client.fetch(query).then((data) => {
       setPinDetail(data[0]);
 
       if (data[0]) {
         const query1 = `*[_type == "pin" && category == '${data[0].category}' && _id != '${data[0]._id}' ]{
-          pinImage,
+           image,
           _id,
           destination,
           postedBy->{
@@ -130,7 +131,9 @@ const PinDetail = function () {
           <div className="flex justify-center items-center">
             <img
               className="rounded-t-3xl rounded-b-lg sm:w-508 w-350 sm:h-685 h-370"
-              src={pinDetail.pinImage}
+              src={
+                (pinDetail?.image && urlFor(pinDetail?.image).width(250).url())
+              }
               alt="user-post"
             />
           </div>

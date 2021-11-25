@@ -28,7 +28,7 @@ const CreatePin = function () {
     client.assets
       .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
       .then((document) => {
-        setImageAsset(document._id);
+        setImageAsset(document);
         console.log('The image was uploaded!', document);
       })
       .catch((error) => {
@@ -41,7 +41,7 @@ const CreatePin = function () {
       title !== ''
       && about !== ''
       && destination !== ''
-      && imageAsset !== ''
+      && imageAsset?._id !== ''
       && category !== ''
     ) {
       setSavingPin(true);
@@ -55,7 +55,7 @@ const CreatePin = function () {
           _type: 'image',
           asset: {
             _type: 'reference',
-            _ref: imageAsset,
+            _ref: imageAsset?._id,
           },
         },
         userId: user.googleId,
@@ -87,7 +87,7 @@ const CreatePin = function () {
                 className="m-5"
               />
             )}
-            {!imageUrl ? (
+            {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control
               <label>
                 <div className="flex flex-col mt-40 items-center justify-center">
@@ -119,7 +119,7 @@ const CreatePin = function () {
                 <button
                   type="button"
                   className="absolute top-60 p-3 rounded-full bg-white text-xl cursor-pointer "
-                  onClick={() => setImageUrl(null)}
+                  // onClick={() => setImageUrl(null)}
                 >
                   <MdDelete />
                 </button>

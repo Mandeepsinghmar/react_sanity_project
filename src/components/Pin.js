@@ -6,7 +6,7 @@ import { FiShare } from 'react-icons/fi';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
-import { client } from '../client';
+import { client, urlFor } from '../client';
 import Share from './Share';
 
 const Pin = function ({ pin }) {
@@ -16,7 +16,7 @@ const Pin = function ({ pin }) {
 
   const navigate = useNavigate();
 
-  const { postedBy, pinImage, _id, destination } = pin;
+  const { postedBy, image, _id, destination } = pin;
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -29,7 +29,7 @@ const Pin = function ({ pin }) {
   };
   let alreadySaved = pin?.save?.filter((item) => item.postedBy._id === user.googleId);
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
-  console.log(alreadySaved?.length);
+  console.log(pin);
 
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
@@ -77,11 +77,9 @@ const Pin = function ({ pin }) {
       >
         <img
           className="rounded-lg w-60 "
-          src={pinImage}
-          // src={
-          //   (pinImage && urlFor(pinImage).width(250).url()) ||
-          //   'https://i.pinimg.com/236x/6f/d8/e0/6fd8e04bc9620686b6527b70a32b79e7.jpg'
-          // }
+          src={
+            (image && urlFor(image).width(250).url())
+          }
           alt="user-post"
         />
 

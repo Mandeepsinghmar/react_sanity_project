@@ -37,12 +37,6 @@ export default {
       type: 'string',
     },
     {
-      name: 'pinImage',
-      title: 'pinImage',
-      type: 'string',
-    },
-
-    {
       name: 'postedBy',
       title: 'PostedBy',
       type: 'postedBy',

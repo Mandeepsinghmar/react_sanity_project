@@ -8,7 +8,7 @@ const Feed = function () {
   const [pins, setPins] = useState();
   useEffect(() => {
     const query = `*[_type == "pin"] | order(_createdAt desc) {
-          pinImage,
+          image,
           _id,
           
           destination,
