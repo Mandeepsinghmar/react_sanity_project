@@ -3,7 +3,7 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import Loader from 'react-loader-spinner';
-// import { createReadStream } from 'fs';
+import { createReadStream } from 'fs';
 
 import { categories } from '../utils/data';
 import { client } from '../client';
@@ -12,11 +12,11 @@ const CreatePin = function () {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState();
-  const [imageUrl, setImageUrl] = useState();
   const [loading, setLoading] = useState(false);
   const [fields, setFields] = useState();
   const [category, setCategory] = useState();
   const [savingPin, setSavingPin] = useState(false);
+  const [imageAsset, setImageAsset] = useState();
 
   const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
@@ -24,52 +24,24 @@ const CreatePin = function () {
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
 
-    // uploading asset using cloudinary
-
-    if (selectedFile) {
-      setLoading(true);
-    }
-
-    if (imageUrl) {
-      setLoading(false);
-    }
-
-    const data = new FormData();
-    data.append('file', selectedFile);
-    data.append('upload_preset', 'social-media-app');
-    data.append('cloud_name', 'detpurfls');
-    if (selectedFile) {
-      fetch('https://api.cloudinary.com/v1_1/detpurfls/image/upload', {
-        method: 'post',
-        body: data,
-      })
-        .then((res) => res.json())
-        .then((result) => {
-          setLoading(false);
-          setImageUrl(result.url);
-        });
-    }
-
     // uploading asset to sanity
-
-    // client.assets
-    //   .upload('image', createReadStream(data), {
-    //     filename: 'myImage.jpg',
-    //   })
-    //   .then((document) => {
-    //     console.log('The image was uploaded!', document);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Upload failed:', error.message);
-    //   });
+    client.assets
+      .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
+      .then((document) => {
+        setImageAsset(document._id);
+        console.log('The image was uploaded!', document);
+      })
+      .catch((error) => {
+        console.error('Upload failed:', error.message);
+      });
   };
-
+  console.log(imageAsset);
   const savePin = () => {
     if (
       title !== ''
       && about !== ''
       && destination !== ''
-      && imageUrl !== ''
+      && imageAsset !== ''
       && category !== ''
     ) {
       setSavingPin(true);
@@ -79,7 +51,13 @@ const CreatePin = function () {
         title,
         about,
         destination,
-        pinImage: imageUrl,
+        image: {
+          _type: 'image',
+          asset: {
+            _type: 'reference',
+            _ref: imageAsset,
+          },
+        },
         userId: user.googleId,
         postedBy: {
           _type: 'postedBy',

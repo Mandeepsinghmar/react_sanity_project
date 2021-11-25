@@ -23,14 +23,14 @@ export default {
       title: 'Category',
       type: 'string',
     },
-    // {
-    //   name: 'pinImage',
-    //   title: 'PinImage',
-    //   type: 'image',
-    //   options: {
-    //     hotspot: true,
-    //   },
-    // },
+    {
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
     {
       name: 'userId',
       title: 'UserId',
