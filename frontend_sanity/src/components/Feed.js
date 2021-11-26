@@ -8,9 +8,12 @@ const Feed = function () {
   const [pins, setPins] = useState();
   useEffect(() => {
     const query = `*[_type == "pin"] | order(_createdAt desc) {
-          image,
+      image{
+        asset->{
+          url
+        }
+      },
           _id,
-          
           destination,
           postedBy->{
             _id,

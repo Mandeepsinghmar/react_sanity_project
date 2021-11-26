@@ -8,7 +8,11 @@ const Recent = function () {
   const date = new Date();
   useEffect(() => {
     const query = `*[_type == "pin"][0...10]{
-          image,
+      image{
+        asset->{
+          url
+        }
+      },
           _id,
           _createdAt,
           destination,

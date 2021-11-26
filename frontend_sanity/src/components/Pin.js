@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { FiShare } from 'react-icons/fi';
+import { IoIosShareAlt } from 'react-icons/io';
+import { MdDownloadForOffline } from 'react-icons/md';
 
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
@@ -82,23 +83,35 @@ const Pin = function ({ pin }) {
           }
           alt="user-post"
         />
+        {/* <img src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900" alt="djdk" /> */}
 
         {postHovered && (
           <div
-            className="absolute top-0 w-full h-full flex flex-col justify-between p-5 pt-2 pb-2 z-50"
+            className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pt-2 pb-2 z-50"
             style={{ height: '100%' }}
           >
             <div className="flex items-center justify-between">
-              <button
-                type="button"
-                onClick={(e) => {
-                  setModalIsOpen(true);
-                  e.stopPropagation();
-                }}
-                className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100"
-              >
-                <FiShare />
-              </button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    setModalIsOpen(true);
+                    e.stopPropagation();
+                  }}
+                  className="bg-white p-2 rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                >
+                  <IoIosShareAlt />
+                </button>
+                <a
+                  href={`${image.asset.url}?dl=`}
+                  download
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  className="bg-white p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100"
+                ><MdDownloadForOffline />
+                </a>
+              </div>
 
               {
           (alreadySaved?.length !== 0) ? (
