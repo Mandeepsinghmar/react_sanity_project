@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 
-const Recent = function () {
+const Recent = () => {
   const [pins, setPins] = useState();
-  const date = new Date();
+
+  //  TODO: pull these queries from the utils file, they clutter the function component view
   useEffect(() => {
     const query = `*[_type == "pin"][0...10]{
       image{
@@ -33,7 +34,6 @@ const Recent = function () {
 
     client.fetch(query).then((data) => {
       setPins(data);
-      console.log(data);
     });
   }, []);
 

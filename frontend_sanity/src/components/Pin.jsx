@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { IoIosShareAlt } from 'react-icons/io';
 import { MdDownloadForOffline } from 'react-icons/md';
-
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
@@ -28,14 +27,14 @@ const Pin = function ({ pin }) {
         window.location.reload();
       });
   };
+
   let alreadySaved = pin?.save?.filter((item) => item.postedBy._id === user.googleId);
+
   alreadySaved = alreadySaved?.length > 0 ? alreadySaved : [];
-  console.log(pin);
 
   const savePin = (id) => {
     if (alreadySaved?.length === 0) {
       setSavingPost(true);
-      console.log(alreadySaved);
 
       client
         .patch(id)
@@ -76,15 +75,7 @@ const Pin = function ({ pin }) {
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className=" relative cursor-zoom-in w-full bg-dark hover:opacity-90 hover:inset-0"
       >
-        <img
-          className="rounded-lg w-60 "
-          src={
-            (image && urlFor(image).width(250).url())
-          }
-          alt="user-post"
-        />
-        {/* <img src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900" alt="djdk" /> */}
-
+        <img className="rounded-lg w-60 " src={(image && urlFor(image).width(250).url())} alt="user-post" />
         {postHovered && (
           <div
             className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pt-2 pb-2 z-50"
@@ -112,29 +103,22 @@ const Pin = function ({ pin }) {
                 ><MdDownloadForOffline />
                 </a>
               </div>
-
-              {
-          (alreadySaved?.length !== 0) ? (
-            <button
-              type="button"
-              className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
-            >
-              {pin?.save?.length}  Saved
-            </button>
-          ) : (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                savePin(_id);
-              }}
-              type="button"
-              className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
-            >
-              {pin?.save?.length}   {savingPost ? 'Saving' : 'Save'}
-            </button>
-          )
-}
-
+              {alreadySaved?.length !== 0 ? (
+                <button type="button" className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 ">
+                  {pin?.save?.length}  Saved
+                </button>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    savePin(_id);
+                  }}
+                  type="button"
+                  className="bg-red-500 text-white font-bold p-2 text-lg rounded-full w-18 "
+                >
+                  {pin?.save?.length}   {savingPost ? 'Saving' : 'Save'}
+                </button>
+              )}
             </div>
             <div className=" flex justify-between items-center gap-2 w-full">
               {destination?.slice(8).length > 0 ? (
@@ -163,7 +147,6 @@ const Pin = function ({ pin }) {
            </button>
            )
         }
-
             </div>
           </div>
         )}

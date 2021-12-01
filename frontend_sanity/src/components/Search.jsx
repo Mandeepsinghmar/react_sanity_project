@@ -4,11 +4,13 @@ import MasonryLayout from './MasonryLayout';
 import { client } from '../client';
 import { categories } from '../utils/data';
 
-const Search = function ({ searchTerm, setSearchTerm }) {
+const Search = ({ searchTerm, setSearchTerm }) => {
   const [pins, setPins] = useState();
 
   useEffect(() => {
     if (searchTerm !== '') {
+      //  TODO: pull these queries from the utils file, they clutter the function component view
+
       const query = `*[_type == "pin" && category == '${searchTerm}']{
         image{
           asset->{
@@ -42,10 +44,7 @@ const Search = function ({ searchTerm, setSearchTerm }) {
     <div>
       <div className="flex flex-wrap justify-center items-center gap-3 mb-10 ">
         {categories.map((category) => (
-          <div
-            className="relative cursor-pointer"
-            onClick={() => setSearchTerm(category.name)}
-          >
+          <div className="relative cursor-pointer" onClick={() => setSearchTerm(category.name)}>
             <img
               src={category.image}
               alt="category"
@@ -57,11 +56,9 @@ const Search = function ({ searchTerm, setSearchTerm }) {
           </div>
         ))}
       </div>
-      {pins?.length !== 0 ? (
-        <MasonryLayout pins={pins} />
-      ) : (
-        <div className="mt-10 text-center text-xl ">No Pins Found!</div>
-      )}
+      {pins?.length !== 0
+        ? <MasonryLayout pins={pins} />
+        : <div className="mt-10 text-center text-xl ">No Pins Found!</div>}
     </div>
   );
 };

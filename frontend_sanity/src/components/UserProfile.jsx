@@ -8,7 +8,7 @@ import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 import Share from './Share';
 
-const UserProfile = function () {
+const UserProfile = () => {
   const [user, setUser] = useState();
   const [pins, setPins] = useState();
   const [text, setText] = useState('Created');
@@ -17,6 +17,8 @@ const UserProfile = function () {
   const User = JSON.parse(localStorage.getItem('user'));
 
   const { userId } = useParams();
+  //  TODO: pull these queries from the utils file, they clutter the function component view
+
   const query = `*[_type == "user" && _id == '${userId}']`;
 
   useEffect(() => {
@@ -26,6 +28,8 @@ const UserProfile = function () {
   }, [userId]);
 
   useEffect(() => {
+    //  TODO: pull these queries from the utils file, they clutter the function component view
+
     if (text === 'Created') {
       const query1 = `*[ _type == 'pin' && userId == '${userId}']{
         image{
@@ -52,6 +56,8 @@ const UserProfile = function () {
         setPins(data);
       });
     } else {
+      //  TODO: pull these queries from the utils file, they clutter the function component view
+
       const query2 = `*[_type == 'pin' && '${userId}' in save[].userId]{
         image{
           asset->{
@@ -80,12 +86,10 @@ const UserProfile = function () {
   }, [text, userId]);
 
   const logout = () => {
-    console.log('logout');
     localStorage.clear();
+
     navigate('/login');
   };
-
-  console.log(user, pins, `${process.env.REACT_APP_GOOGLE_API_TOKEN}`);
 
   return (
     <div>
@@ -139,9 +143,7 @@ const UserProfile = function () {
                 )}
                 onLogoutSuccess={logout}
                 cookiePolicy="single_host_origin"
-
               />
-
             )}
           </div>
           <div className="text-center mb-5">
@@ -173,7 +175,6 @@ const UserProfile = function () {
         </div>
       )}
       {pins?.length > 0 ? (
-
         <MasonryLayout pins={pins} />
       ) : (
         <div className="flex flex-col justify-center items-center w-full text-3xl mt-10">

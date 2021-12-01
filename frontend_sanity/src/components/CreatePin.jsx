@@ -36,7 +36,6 @@ const CreatePin = () => {
       });
   };
 
-  console.log(imageAsset);
   const savePin = () => {
     if (
       title !== ''
@@ -80,7 +79,6 @@ const CreatePin = () => {
         <div className="bg-secondaryColor p-3 w-340">
           <div className=" border-2 border-dotted border-gray-300 p-3">
             {loading && (
-
               <Loader
                 type="Circles"
                 color="#00BFFF"
@@ -178,7 +176,6 @@ const CreatePin = () => {
                 ))}
               </select>
             </div>
-
             <button
               type="button"
               onClick={savePin}

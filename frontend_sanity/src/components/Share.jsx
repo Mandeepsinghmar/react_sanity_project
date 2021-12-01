@@ -41,6 +41,8 @@ const style = {
   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 };
 const baseUrl = 'http://localhost:3000';
+
+// TODO: Remove Share Modal altogether, it adds a lot of code and complexity without offering much value
 const Share = function ({ url, modalIsOpen, setModalIsOpen, title }) {
   Modal.setAppElement('#root');
   return (

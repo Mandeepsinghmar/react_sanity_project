@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 import { client } from '../client';
 
-const Login = function () {
+const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (response) => {
     localStorage.setItem('user', JSON.stringify(response.profileObj));
