@@ -3,12 +3,11 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import Loader from 'react-loader-spinner';
-import { createReadStream } from 'fs';
 
 import { categories } from '../utils/data';
 import { client } from '../client';
 
-const CreatePin = function () {
+const CreatePin = () => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState();
@@ -36,6 +35,7 @@ const CreatePin = function () {
         console.error('Upload failed:', error.message);
       });
   };
+
   console.log(imageAsset);
   const savePin = () => {
     if (
