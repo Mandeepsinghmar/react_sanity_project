@@ -6,20 +6,19 @@ import Loader from 'react-loader-spinner';
 
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
-import Share from './Share';
+import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 
-const UserProfile = function () {
+const UserProfile = () => {
   const [user, setUser] = useState();
   const [pins, setPins] = useState();
   const [text, setText] = useState('Created');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const navigate = useNavigate();
   const User = JSON.parse(localStorage.getItem('user'));
 
   const { userId } = useParams();
-  const query = `*[_type == "user" && _id == '${userId}']`;
 
   useEffect(() => {
+    const query = userQuery(userId);
     client.fetch(query).then((data) => {
       setUser(data[0]);
     });
@@ -27,78 +26,27 @@ const UserProfile = function () {
 
   useEffect(() => {
     if (text === 'Created') {
-      const query1 = `*[ _type == 'pin' && userId == '${userId}']{
-        image{
-          asset->{
-            url
-          }
-        },
-        _id,
-        destination,
-        postedBy->{
-          _id,
-          userName,
-          image
-        },
-        save[]{
-          postedBy->{
-            _id,
-            userName,
-            image
-          },
-        },
-      }`;
-      client.fetch(query1).then((data) => {
+      const createdPinsQuery = userCreatedPinsQuery(userId);
+      client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
       });
     } else {
-      const query2 = `*[_type == 'pin' && '${userId}' in save[].userId]{
-        image{
-          asset->{
-            url
-          }
-        },
-        _id,
-        destination,
-        postedBy->{
-          _id,
-          userName,
-          image
-        },
-        save[]{
-          postedBy->{
-            _id,
-            userName,
-            image
-          },
-        },
-      }`;
-      client.fetch(query2).then((data) => {
+      const savedPinsQuery = userSavedPinsQuery(userId);
+      client.fetch(savedPinsQuery).then((data) => {
         setPins(data);
       });
     }
   }, [text, userId]);
 
   const logout = () => {
-    console.log('logout');
     localStorage.clear();
+
     navigate('/login');
   };
 
-  console.log(user, pins, `${process.env.REACT_APP_GOOGLE_API_TOKEN}`);
-
   return (
     <div>
-      {modalIsOpen && (
-        <div>
-          <Share
-            url={`user-profile/${userId}`}
-            modalIsOpen={modalIsOpen}
-            setModalIsOpen={setModalIsOpen}
-            title="Profile"
-          />
-        </div>
-      )}
+
       {user ? (
         <div className="lg:w-656 m-auto">
           <div>
@@ -117,13 +65,7 @@ const UserProfile = function () {
             {user.userName}
           </h1>
           <div className="flex items-center justify-center gap-4 mt-5 mb-4">
-            <button
-              type="button"
-              onClick={() => setModalIsOpen(true)}
-              className="bg-red-500 text-white font-bold p-2 rounded-full w-16 "
-            >
-              Share
-            </button>
+
             {userId === User.googleId && (
               <GoogleLogout
                 clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
@@ -139,9 +81,7 @@ const UserProfile = function () {
                 )}
                 onLogoutSuccess={logout}
                 cookiePolicy="single_host_origin"
-
               />
-
             )}
           </div>
           <div className="text-center mb-5">
@@ -173,7 +113,6 @@ const UserProfile = function () {
         </div>
       )}
       {pins?.length > 0 ? (
-
         <MasonryLayout pins={pins} />
       ) : (
         <div className="flex flex-col justify-center items-center w-full text-3xl mt-10">

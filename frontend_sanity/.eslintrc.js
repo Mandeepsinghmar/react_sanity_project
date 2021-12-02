@@ -23,6 +23,9 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/function-component-definition': 0,
+    'no-nonoctal-decimal-escape': 0,
+    'no-unsafe-optional-chaining': 0,
     'import/extensions': 0,
     'react/prop-types': 0,
     'linebreak-style': 0,

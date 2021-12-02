@@ -1,33 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { Login, Search, TopNavbar, SideNavbar, Feed, PinDetail, UserProfile, CreatePin, Recent } from './components';
 
-const Routing = function () {
-  const navigate = useNavigate();
+const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const User = JSON.parse(localStorage.getItem('user'));
 
-    if (!User) {
-      navigate('/login');
-    }
+    if (!User) navigate('/login');
   }, []);
+
   return (
     <div className="flex bg-mainColor">
       <div className="fixed hidden sm:block w-275">
         <SideNavbar />
       </div>
-
-      <div
-        className="ml-2 sm:ml-320 pr-2 flex-1"
-      >
+      <div className="ml-2 sm:ml-320 pr-2 flex-1">
         <div className="bg-mainColor">
           <TopNavbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
@@ -39,24 +30,11 @@ const Routing = function () {
             <Route path="/create-pin" element={<CreatePin />} />
             <Route path="login" element={<Login />} />
             <Route path="recent" element={<Recent />} />
-            <Route
-              path="/search"
-              element={
-                <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-              }
-            />
+            <Route path="/search" element={<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />} />
           </Routes>
         </div>
       </div>
     </div>
-  );
-};
-
-const App = function App() {
-  return (
-    <Router>
-      <Routing />
-    </Router>
   );
 };
 

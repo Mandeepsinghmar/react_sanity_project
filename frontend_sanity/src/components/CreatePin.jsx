@@ -7,7 +7,7 @@ import Loader from 'react-loader-spinner';
 import { categories } from '../utils/data';
 import { client } from '../client';
 
-const CreatePin = function () {
+const CreatePin = () => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState();
@@ -23,6 +23,7 @@ const CreatePin = function () {
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
     setLoading(true);
+    // uploading asset to sanity
     client.assets
       .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
       .then((document) => {
@@ -34,6 +35,7 @@ const CreatePin = function () {
         console.error('Upload failed:', error.message);
       });
   };
+
   const savePin = () => {
     if (
       title !== ''
@@ -77,7 +79,6 @@ const CreatePin = function () {
         <div className="bg-secondaryColor p-3 w-340">
           <div className=" border-2 border-dotted border-gray-300 p-3">
             {loading && (
-
               <Loader
                 type="Circles"
                 color="#00BFFF"
@@ -88,7 +89,7 @@ const CreatePin = function () {
             )}
             {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control
-              <label className="cursor-pointer">
+              <label>
                 <div className="flex flex-col mt-40 items-center justify-center">
                   <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-2xl">
@@ -175,7 +176,6 @@ const CreatePin = function () {
                 ))}
               </select>
             </div>
-
             <button
               type="button"
               onClick={savePin}
