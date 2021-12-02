@@ -5,6 +5,9 @@ import { RiHomeFill } from 'react-icons/ri';
 import { BiLogInCircle } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 
+const isNotActiveStyle = 'flex items-center gap-3 text-gray-500';
+const isActiveStyle = 'flex items-center gap-3 font-extrabold';
+
 const SideNavbar = () => {
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -18,20 +21,19 @@ const SideNavbar = () => {
       </Link>
       <div className="flex flex-col justify-between items-start h-800 ">
         <div className="flex flex-col gap-5">
-          {/* TODO: Remove code duplication - flex items-center gap-3 font-extrabold  text-gray-500 */}
           {user ? (
             <>
-              <NavLink to="/" className={({ isActive }) => (isActive ? 'flex items-center gap-3 font-extrabold ' : 'flex items-center gap-3 text-gray-500')}>
+              <NavLink to="/" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
                 <RiHomeFill />
                 Home
               </NavLink>
-              <NavLink to="/recent" className={({ isActive }) => (isActive ? 'flex items-center gap-3 font-black' : 'flex items-center gap-3 text-gray-500 ')}>
+              <NavLink to="/recent" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
                 <AiFillClockCircle />
                 Recent
               </NavLink>
             </>
           ) : (
-            <NavLink to="/login" className={({ isActive }) => (isActive ? 'flex items-center gap-3 font-extrabold ' : 'flex items-center gap-3 text-gray-500')}>
+            <NavLink to="/login" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
               <BiLogInCircle />
               Login
             </NavLink>
