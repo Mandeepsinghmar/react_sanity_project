@@ -80,7 +80,7 @@ const Pin = ({ pin }) => {
                   <IoIosShareAlt />
                 </button>
                 <a
-                  href={`${image.asset.url}?dl=`}
+                  href={`${image?.asset?.url}?dl=`}
                   download
                   onClick={(e) => {
                     e.stopPropagation();
