@@ -87,8 +87,6 @@ const PinDetail = function () {
     });
   };
 
-  console.log(pinDetail);
-
   useEffect(() => {
     fetchPinDetails();
   }, [pinId]);

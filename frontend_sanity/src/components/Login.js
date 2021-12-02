@@ -52,7 +52,7 @@ const Login = function () {
         </div>
         <img
           className="w-96 h-96 rounded-2xl"
-          src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900"
+          src="https://media.istockphoto.com/photos/fingerprint-biometric-authentication-button-digital-security-concept-picture-id1299730469?b=1&k=20&m=1299730469&s=170667a&w=0&h=w-vAa1MLy__YKtTR41J5ollZjdW0oe9lOmAMdwbwrFg="
           alt="pic"
         />
       </div>

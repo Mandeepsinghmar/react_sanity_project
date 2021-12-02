@@ -3,7 +3,6 @@ import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import Loader from 'react-loader-spinner';
-import { createReadStream } from 'fs';
 
 import { categories } from '../utils/data';
 import { client } from '../client';
@@ -24,7 +23,6 @@ const CreatePin = function () {
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
     setLoading(true);
-    // uploading asset to sanity
     client.assets
       .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
       .then((document) => {
@@ -36,7 +34,6 @@ const CreatePin = function () {
         console.error('Upload failed:', error.message);
       });
   };
-  console.log(imageAsset);
   const savePin = () => {
     if (
       title !== ''
@@ -91,7 +88,7 @@ const CreatePin = function () {
             )}
             {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control
-              <label>
+              <label className="cursor-pointer">
                 <div className="flex flex-col mt-40 items-center justify-center">
                   <div className="flex flex-col justify-center items-center">
                     <p className="font-bold text-2xl">

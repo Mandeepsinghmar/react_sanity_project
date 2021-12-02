@@ -77,14 +77,12 @@ const Pin = function ({ pin }) {
         className=" relative cursor-zoom-in w-full bg-dark hover:opacity-90 hover:inset-0"
       >
         <img
-          className="rounded-lg w-60 "
+          className="rounded-2xl w-60 "
           src={
             (image && urlFor(image).width(250).url())
           }
           alt="user-post"
         />
-        {/* <img src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900" alt="djdk" /> */}
-
         {postHovered && (
           <div
             className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pt-2 pb-2 z-50"
@@ -168,13 +166,13 @@ const Pin = function ({ pin }) {
           </div>
         )}
       </div>
-      <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2">
+      <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
         <img
           className="w-8 h-8 rounded-full"
           src={postedBy?.image}
           alt="user-profile"
         />
-        <p className="font-bold">{postedBy?.userName}</p>
+        <p className="font-semibold capitalize">{postedBy?.userName}</p>
       </Link>
     </div>
   );
