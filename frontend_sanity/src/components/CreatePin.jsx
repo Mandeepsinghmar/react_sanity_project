@@ -118,7 +118,7 @@ const CreatePin = () => {
                 />
                 <button
                   type="button"
-                  className="absolute top-60 p-3 rounded-full bg-white text-xl cursor-pointer "
+                  className="absolute top-60 p-3 rounded-full bg-white text-xl cursor-pointer outline-none"
                   onClick={() => setImageAsset(null)}
                 >
                   <MdDelete />
@@ -179,7 +179,7 @@ const CreatePin = () => {
             <button
               type="button"
               onClick={savePin}
-              className="bg-red-500 text-white font-bold p-2 rounded-full w-28 "
+              className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
             >
               {savingPin ? 'Saving Pin...' : 'Save Pin'}
             </button>

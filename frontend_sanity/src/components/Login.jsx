@@ -38,7 +38,7 @@ const Login = () => {
             render={(renderProps) => (
               <button
                 type="button"
-                className="bg-white p-2 pl-4 pr-4 text-2xl w-300 rounded-3xl flex items-center justify-center text-dark  hover:opacity-95"
+                className="bg-white p-2 pl-4 pr-4 text-2xl w-300 rounded-3xl flex items-center justify-center text-dark  hover:opacity-95 outline-none"
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
               >

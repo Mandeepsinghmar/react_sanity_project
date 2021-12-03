@@ -85,7 +85,7 @@ const PinDetail = () => {
               <div className="flex gap-2 items-center">
                 <button
                   type="button"
-                  className="bg-secondaryColor p-2 rounded-full text-xl flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                  className="bg-secondaryColor p-2 rounded-full text-xl flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
                 >
                   <IoIosShareAlt />
                 </button>
@@ -121,7 +121,7 @@ const PinDetail = () => {
                   {/* <Link to={`/user-profile/${item?.postedBy?._id}`}> */}
                   <img
                     src={item.postedBy?.image}
-                    className="w-10 h-10 rounded-full"
+                    className="w-10 h-10 rounded-full cursor-pointer"
                     alt="user-profile"
                   />
                   {/* </Link> */}
@@ -135,9 +135,9 @@ const PinDetail = () => {
               ))}
             </div>
             <div className="flex mt-6 gap-3">
-              <img src={user.imageUrl} className="w-10 h-10 rounded-full" alt="user-profile" />
+              <img src={user.imageUrl} className="w-10 h-10 rounded-full cursor-pointer" alt="user-profile" />
               <input
-                className="border-gray-100 outline-none border-2 p-2 rounded-2xl w-72"
+                className="border-gray-100 outline-none border-2 p-2 rounded-2xl w-72 focus:border-gray-300"
                 type="text"
                 placeholder="Add a comment"
                 value={comment}
@@ -145,7 +145,7 @@ const PinDetail = () => {
               />
               <button
                 type="button"
-                className="bg-red-500 text-white rounded-full p-2 pl-3 pr-3 font-semibold"
+                className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
                 onClick={addComment}
               >
                 {addingComment ? 'Doing...' : 'Done'}

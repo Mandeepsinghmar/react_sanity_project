@@ -72,7 +72,7 @@ const UserProfile = () => {
                 render={(renderProps) => (
                   <button
                     type="button"
-                    className="bg-white p-2 text-2xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100"
+                    className="bg-white p-2 text-2xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}
                   >
@@ -88,14 +88,14 @@ const UserProfile = () => {
             <button
               type="button"
               onClick={(e) => setText(e.target.textContent)}
-              className="bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 "
+              className="bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none"
             >
               Created
             </button>
             <button
               type="button"
               onClick={(e) => setText(e.target.textContent)}
-              className="bg-red-500 text-white font-bold p-2 rounded-full w-20 "
+              className="bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none"
             >
               Saved
             </button>
