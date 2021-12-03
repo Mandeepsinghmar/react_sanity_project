@@ -20,7 +20,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
     <div>
       <div className="flex flex-wrap justify-center items-center gap-3 mb-10 h-340 overflow-y-auto">
         {categories.map((category) => (
-          <div className="relative cursor-pointer" onClick={() => setSearchTerm(category.name)}>
+          <div className="relative cursor-pointer hover:shadow-md rounded-2xl transition-all duration-500 ease-in-out" onClick={() => setSearchTerm(category.name)}>
             <img
               src={category.image}
               alt="category"

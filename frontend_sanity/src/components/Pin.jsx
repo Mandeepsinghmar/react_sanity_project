@@ -60,9 +60,11 @@ const Pin = ({ pin }) => {
         onMouseEnter={() => setPostHovered(true)}
         onMouseLeave={() => setPostHovered(false)}
         onClick={() => navigate(`/pin-detail/${_id}`)}
-        className=" relative cursor-zoom-in w-full bg-dark hover:opacity-90 hover:inset-0"
+        className=" relative cursor-zoom-in w-full hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
-        <img className="rounded-lg w-60 " src={(image && urlFor(image).width(250).url())} alt="user-post" />
+        {image && (
+          <img className="w-60 " src={(image && urlFor(image).width(250).url())} alt="user-post" />
+        )}
         {postHovered && (
           <div
             className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50"
@@ -75,7 +77,7 @@ const Pin = ({ pin }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
+                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 hover:shadow-md outline-none"
                 >
                   <IoIosShareAlt />
                 </button>
@@ -85,12 +87,12 @@ const Pin = ({ pin }) => {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
-                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 outline-none"
+                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow-md outline-none"
                 ><MdDownloadForOffline />
                 </a>
               </div>
               {alreadySaved?.length !== 0 ? (
-                <button type="button" className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl outline-none">
+                <button type="button" className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none">
                   {pin?.save?.length}  Saved
                 </button>
               ) : (
@@ -100,7 +102,7 @@ const Pin = ({ pin }) => {
                     savePin(_id);
                   }}
                   type="button"
-                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl outline-none"
+                  className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-md outline-none"
                 >
                   {pin?.save?.length}   {savingPost ? 'Saving' : 'Save'}
                 </button>
@@ -111,7 +113,7 @@ const Pin = ({ pin }) => {
                 <a
                   href={destination}
                   target="_blank"
-                  className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100"
+                  className="bg-white flex items-center gap-2 text-black font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md"
                   rel="noreferrer"
                 >
                   {' '}
