@@ -18,7 +18,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center items-center gap-3 mb-10 h-340 overflow-y-auto">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
         {categories.map((category) => (
           <div className="relative cursor-pointer hover:shadow-md rounded-2xl transition-all duration-500 ease-in-out" onClick={() => setSearchTerm(category.name)}>
             <img

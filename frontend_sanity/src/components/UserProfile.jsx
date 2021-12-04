@@ -45,13 +45,12 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-
+    <div className="pb-2">
       {user ? (
-        <div className="lg:w-656 m-auto">
-          <div>
+        <div>
+          <div className="flex flex-col justify-center items-center">
             <img
-              className="rounded-lg lg:w-656 h-370 m-auto "
+              className="rounded-lg lg:w-656 h-370"
               src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900"
               alt="user-pic"
             />
@@ -115,7 +114,7 @@ const UserProfile = () => {
       {pins?.length > 0 ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <div className="flex flex-col justify-center items-center w-full text-3xl mt-10">
+        <div className="flex flex-col justify-center font-bold items-center w-full text-1xl mt-2">
           No Pins Found!
         </div>
       )}

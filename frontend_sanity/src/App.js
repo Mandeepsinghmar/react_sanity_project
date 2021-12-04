@@ -17,7 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="flex bg-mainColor md:flex-row flex-col">
+    <div className="flex bg-mainColor md:flex-row flex-col h-screen">
       <div className="hidden md:flex h-screen flex-initial">
         <SideNavbar />
       </div>
