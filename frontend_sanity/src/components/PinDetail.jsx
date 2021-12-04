@@ -72,15 +72,15 @@ const PinDetail = () => {
   return (
     <>
       {pinDetail && (
-        <div className="flex xl:flex-row flex-col m-auto bg-white gap-8 pb-3 " style={{ maxWidth: '1016px', borderRadius: '32px' }}>
-          <div className="flex justify-center items-center">
+        <div className="flex xl:flex-row flex-col m-auto bg-white" style={{ maxWidth: '1016px', borderRadius: '32px' }}>
+          <div className="flex justify-center items-center md:items-start">
             <img
-              className="rounded-t-3xl rounded-b-lg sm:w-508 w-350 sm:h-685 h-370"
-              src={(pinDetail?.image && urlFor(pinDetail?.image).width(250).url())}
+              className="rounded-t-3xl rounded-b-lg flex flex-initial w-full h-auto w-max-650"
+              src={(pinDetail?.image && urlFor(pinDetail?.image).url())}
               alt="user-post"
             />
           </div>
-          <div className="w-96 lg:pt-5 pl-5 pr-4">
+          <div className="w-full p-5">
             <div className="flex items-center justify-between">
               <div className="flex gap-2 items-center">
                 <button
@@ -134,10 +134,10 @@ const PinDetail = () => {
                 </div>
               ))}
             </div>
-            <div className="flex mt-6 gap-3">
+            <div className="flex flex-wrap mt-6 gap-3">
               <img src={user.imageUrl} className="w-10 h-10 rounded-full cursor-pointer" alt="user-profile" />
               <input
-                className="border-gray-100 outline-none border-2 p-2 rounded-2xl w-72 focus:border-gray-300"
+                className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
                 type="text"
                 placeholder="Add a comment"
                 value={comment}
