@@ -63,7 +63,7 @@ const Pin = ({ pin }) => {
         className=" relative cursor-zoom-in w-full hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
         {image && (
-          <img className="w-60 " src={(image && urlFor(image).width(250).url())} alt="user-post" />
+          <img className="w-full " src={(image && urlFor(image).width(250).url())} alt="user-post" />
         )}
         {postHovered && (
           <div
