@@ -28,6 +28,9 @@ module.exports = {
       maxHeight: {
         370: '370px',
       },
+      minWidth: {
+        210: '210px',
+      },
       textColor: {
         lightGray: '#F1EFEE',
         primary: '#FAFAFA',

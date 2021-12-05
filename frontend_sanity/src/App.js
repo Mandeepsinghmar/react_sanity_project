@@ -17,7 +17,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="flex bg-mainColor md:flex-row flex-col h-screen">
+    <div className="flex bg-gray-50 md:flex-row flex-col h-screen">
       <div className="hidden md:flex h-screen flex-initial">
         <SideNavbar />
       </div>
@@ -41,10 +41,10 @@ const App = () => {
         )}
       </div>
       <div className="px-5 pb-2 flex-1 h-screen overflow-y-scroll">
-        <div className="bg-mainColor">
+        <div className="bg-gray-50">
           <TopNavbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
-        <div>
+        <div className="h-full">
           <Routes>
             <Route exact path="/" element={<Feed />} />
             <Route path="/pin-detail/:pinId" element={<PinDetail />} />

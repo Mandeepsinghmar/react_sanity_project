@@ -10,8 +10,8 @@ const TopNavbar = ({ setSearchTerm, searchTerm }) => {
   if (user) {
     return (
       <div className="flex gap-5 w-full sm:pt-10 pb-5 ">
-        <div className=" flex justify-start items-center w-full px-2 rounded-md bg-secondaryColor outline-none">
-          <IoMdSearch fontSize={21} />
+        <div className=" flex justify-start items-center w-full px-2 rounded-md bg-secondaryColor border-none outline-none focus-within:shadow-sm">
+          <IoMdSearch fontSize={21} className="ml-1" />
           <input
             type="text"
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -20,7 +20,6 @@ const TopNavbar = ({ setSearchTerm, searchTerm }) => {
             onFocus={() => navigate('/search')}
             className="ml-1 p-2 w-full bg-secondaryColor outline-none"
           />
-
         </div>
         <div className="flex gap-3 mr-1 ">
           <Link to={`user-profile/${user?.googleId}`}>

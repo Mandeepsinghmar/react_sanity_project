@@ -23,15 +23,15 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="flex gap-2 mt-12 items-center justify-center">
+    <div className="flex justify-center items-center flex-col h-full">
+      <div className=" hidden md:flex gap-2 py-5 items-center justify-center">
         <button type="button" className="bg-red-500 text-white rounded-full p-1 w-8 h-8 font-bold">
           S
         </button>
         <h2 className="font-extrabold text-xl ">ShareMe</h2>
       </div>
       <div className="mt-6 flex flex-col justify-center items-center gap-5 relative">
-        <p className="text-5xl font-semibold mb-4">Sign in to get your ideas</p>
+        <p className=" text-3xl md:text-5xl font-semibold mb-4 text-center">Sign in to get your ideas</p>
         <div className="absolute bottom-40">
           <GoogleLogin
             clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
