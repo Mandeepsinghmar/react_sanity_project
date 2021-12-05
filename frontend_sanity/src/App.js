@@ -32,9 +32,9 @@ const App = () => {
           </Link>
         </div>
         {toggleSidebar && (
-          <div className="fixed w-4/5 bg-white h-screen shadow-md z-10">
+          <div className="fixed w-4/5 bg-white h-screen shadow-md z-10 animate-slide-in">
             <div className="absolute w-full flex justify-end items-center p-2">
-              <AiFillCloseCircle fontSize={30} onClick={() => setToggleSidebar(false)} />
+              <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)} />
             </div>
             <SideNavbar />
           </div>

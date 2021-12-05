@@ -41,6 +41,21 @@ module.exports = {
         mainColor: '#FBF8F9',
         secondaryColor: '#F0F0F0',
       },
+      keyframes: {
+        'slide-in': {
+          '0%': {
+            '-webkit-transform': 'translateX(-200px)',
+            transform: 'translateX(-200px)',
+          },
+          '100%': {
+            '-webkit-transform': 'translateX(0px)',
+            transform: 'translateX(0px)',
+          },
+        },
+      },
+      animation: {
+        'slide-in': 'slide-in 0.5s ease-out',
+      },
     },
     cursor: {
       'zoom-in': 'zoom-in',
