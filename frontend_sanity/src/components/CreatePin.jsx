@@ -87,14 +87,14 @@ const CreatePin = () => {
       )}
       <div className=" flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5  w-full">
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
-          <div className=" border-2 border-dotted border-gray-300 p-3 w-full h-420">
+          <div className=" flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
             {loading && (
               <Loader
                 type="Circles"
                 color="#00BFFF"
                 height={50}
                 width={200}
-                className="m-5 ml-10"
+                className="m-5"
               />
             )}
             {!imageAsset ? (
@@ -120,15 +120,15 @@ const CreatePin = () => {
                 />
               </label>
             ) : (
-              <div className="relative">
+              <div className="relative h-full">
                 <img
                   src={imageAsset?.url}
                   alt="uploaded-pic"
-                  className="h-510 w-300"
+                  className="h-full w-full"
                 />
                 <button
                   type="button"
-                  className="absolute top-60 p-3 rounded-full bg-white text-xl cursor-pointer outline-none"
+                  className="absolute bottom-3 right-3 p-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out"
                   onClick={() => setImageAsset(null)}
                 >
                   <MdDelete />
