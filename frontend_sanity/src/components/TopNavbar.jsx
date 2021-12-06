@@ -9,7 +9,7 @@ const TopNavbar = ({ setSearchTerm, searchTerm }) => {
 
   if (user) {
     return (
-      <div className="flex gap-2 md:gap-5 w-full sm:pt-5 pb-7 ">
+      <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7 ">
         <div className="flex justify-start items-center w-full px-2 rounded-md bg-secondaryColor border-none outline-none focus-within:shadow-sm">
           <IoMdSearch fontSize={21} className="ml-1" />
           <input

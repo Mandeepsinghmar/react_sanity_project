@@ -8,10 +8,14 @@ import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 
+const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
+const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
+
 const UserProfile = () => {
   const [user, setUser] = useState();
   const [pins, setPins] = useState();
   const [text, setText] = useState('Created');
+  const [activeBtn, setActiveBtn] = useState('created');
   const navigate = useNavigate();
   const User = JSON.parse(localStorage.getItem('user'));
 
@@ -47,57 +51,76 @@ const UserProfile = () => {
   return (
     <div className="pb-2">
       {user ? (
-        <div>
-          <div className="flex flex-col justify-center items-center">
-            <img
-              className="rounded-lg lg:w-656 h-370"
-              src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900"
-              alt="user-pic"
-            />
-            <img
-              className="rounded-full w-28 h-28 m-auto -mt-14 "
-              src={user.image}
-              alt="user-pic"
-            />
-          </div>
-          <h1 className="font-bold text-3xl text-center mt-3">
-            {user.userName}
-          </h1>
-          <div className="flex items-center justify-center gap-4 mt-5 mb-4">
+        <div className="flex flex-col">
+          <div className="relative flex flex-col mb-7">
+            <div className="flex flex-col justify-center items-center">
+              <img
+                className=" w-full h-370 2xl:h-510 shadow-lg object-cover"
+                src="https://source.unsplash.com/1600x900/?nature,photography,laptop"
+                alt="user-pic"
+              />
+              <img
+                className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
+                src={user.image}
+                alt="user-pic"
+              />
+            </div>
+            <h1 className="font-bold text-3xl text-center mt-3">
+              {user.userName}
+            </h1>
 
-            {userId === User.googleId && (
+            <div className="absolute top-0 z-1 right-0 p-2">
+              {userId === User.googleId && (
               <GoogleLogout
                 clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
                 render={(renderProps) => (
                   <button
                     type="button"
-                    className="bg-white p-2 text-2xl rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
+                    className=" bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
                     onClick={renderProps.onClick}
                     disabled={renderProps.disabled}
                   >
-                    <AiOutlineLogout />
+                    <AiOutlineLogout color="red" fontSize={21} />
                   </button>
                 )}
                 onLogoutSuccess={logout}
                 cookiePolicy="single_host_origin"
               />
-            )}
+              )}
+            </div>
           </div>
-          <div className="text-center mb-5">
+
+          <div className="text-center  mb-7">
             <button
               type="button"
-              onClick={(e) => setText(e.target.textContent)}
-              className="bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none"
+              onClick={(e) => {
+                setText(e.target.textContent);
+                setActiveBtn('created');
+              }}
+              className={`${activeBtn === 'created' ? activeBtnStyles : notActiveBtnStyles}`}
             >
               Created
             </button>
             <button
               type="button"
-              onClick={(e) => setText(e.target.textContent)}
-              className="bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none"
+              onClick={(e) => {
+                setText(e.target.textContent);
+                setActiveBtn('saved');
+              }}
+              className={`${activeBtn === 'saved' ? activeBtnStyles : notActiveBtnStyles}`}
             >
               Saved
             </button>
+          </div>
+
+          <div className="w-full">
+            {pins?.length > 0 ? (
+              <MasonryLayout pins={pins} />
+            ) : (
+              <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
+                No Pins Found!
+              </div>
+            )}
           </div>
         </div>
       ) : (
@@ -109,13 +132,6 @@ const UserProfile = () => {
             width={200}
             className="m-5"
           />
-        </div>
-      )}
-      {pins?.length > 0 ? (
-        <MasonryLayout pins={pins} />
-      ) : (
-        <div className="flex flex-col justify-center font-bold items-center w-full text-1xl mt-2">
-          No Pins Found!
         </div>
       )}
     </div>
