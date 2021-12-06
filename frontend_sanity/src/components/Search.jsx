@@ -3,24 +3,28 @@ import React, { useEffect, useState } from 'react';
 import MasonryLayout from './MasonryLayout';
 import { client } from '../client';
 import { categories, searchQuery } from '../utils/data';
+import Spineer from './Spinner';
 
 const Search = ({ searchTerm, setSearchTerm }) => {
   const [pins, setPins] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (searchTerm !== '') {
-      const query = searchQuery(searchTerm);
+      setLoading(true);
+      const query = searchQuery(searchTerm.toLowerCase());
       client.fetch(query).then((data) => {
         setPins(data);
+        setLoading(false);
       });
     }
   }, [searchTerm]);
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center items-center gap-3 mb-10 h-340 overflow-y-auto">
+      <div className="flex flex-wrap justify-center items-center gap-3 mb-10">
         {categories.map((category) => (
-          <div className="relative cursor-pointer" onClick={() => setSearchTerm(category.name)}>
+          <div className="relative cursor-pointer hover:shadow-md rounded-2xl transition-all duration-500 ease-in-out" onClick={() => setSearchTerm(category.name)}>
             <img
               src={category.image}
               alt="category"
@@ -32,9 +36,11 @@ const Search = ({ searchTerm, setSearchTerm }) => {
           </div>
         ))}
       </div>
-      {pins?.length !== 0
-        ? <MasonryLayout pins={pins} />
-        : <div className="mt-10 text-center text-xl ">No Pins Found!</div>}
+      {loading && <Spineer message="Searching pins" />}
+      {pins?.length !== 0 && <MasonryLayout pins={pins} />}
+      {pins?.length === 0 && searchTerm !== '' && !loading && (
+        <div className="mt-10 text-center text-xl ">No Pins Found!</div>
+      )}
     </div>
   );
 };

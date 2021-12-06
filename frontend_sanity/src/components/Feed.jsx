@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Loader from 'react-loader-spinner';
 
 import { client } from '../client';
 import { feedQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
+import Spineer from './Spinner';
 
 const Feed = () => {
   const [pins, setPins] = useState();
@@ -13,10 +13,7 @@ const Feed = () => {
 
   if (!pins) {
     return (
-      <div className="flex flex-col justify-center items-center w-full m-5">
-        <Loader type="Circles" color="#00BFFF" height={50} width={200} className="m-5" />
-        <p className="font-bold text-2xl">We are adding new ideas to your feed!</p>
-      </div>
+      <Spineer message="We are adding new ideas to your feed!" />
     );
   }
 

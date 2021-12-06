@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { IoIosShareAlt } from 'react-icons/io';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
 import { v4 as uuidv4 } from 'uuid';
 
 import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
+import Spineer from './Spinner';
 
 const PinDetail = () => {
   const { pinId } = useParams();
@@ -57,38 +56,24 @@ const PinDetail = () => {
 
   if (!pinDetail) {
     return (
-      <div className="flex flex-col justify-center items-center w-full">
-        <Loader
-          type="Circles"
-          color="#00BFFF"
-          height={50}
-          width={200}
-          className="m-5"
-        />
-      </div>
+      <Spineer message="Showing pin" />
     );
   }
 
   return (
     <>
       {pinDetail && (
-        <div className="flex xl:flex-row flex-col m-auto bg-white gap-8 pb-3 " style={{ maxWidth: '1016px', borderRadius: '32px' }}>
-          <div className="flex justify-center items-center">
+        <div className="flex xl:flex-row flex-col m-auto bg-white" style={{ maxWidth: '1500px', borderRadius: '32px' }}>
+          <div className="flex justify-center items-center md:items-start flex-initial">
             <img
-              className="rounded-t-3xl rounded-b-lg sm:w-508 w-350 sm:h-685 h-370"
-              src={(pinDetail?.image && urlFor(pinDetail?.image).width(250).url())}
+              className="rounded-t-3xl rounded-b-lg"
+              src={(pinDetail?.image && urlFor(pinDetail?.image).url())}
               alt="user-post"
             />
           </div>
-          <div className="w-96 lg:pt-5 pl-5 pr-4">
+          <div className="w-full p-5 flex-1 xl:min-w-620">
             <div className="flex items-center justify-between">
               <div className="flex gap-2 items-center">
-                <button
-                  type="button"
-                  className="bg-secondaryColor p-2 rounded-full text-xl flex items-center justify-center text-dark opacity-75 hover:opacity-100"
-                >
-                  <IoIosShareAlt />
-                </button>
                 <a
                   href={`${pinDetail.image.asset.url}?dl=`}
                   download
@@ -121,7 +106,7 @@ const PinDetail = () => {
                   {/* <Link to={`/user-profile/${item?.postedBy?._id}`}> */}
                   <img
                     src={item.postedBy?.image}
-                    className="w-10 h-10 rounded-full"
+                    className="w-10 h-10 rounded-full cursor-pointer"
                     alt="user-profile"
                   />
                   {/* </Link> */}
@@ -134,10 +119,10 @@ const PinDetail = () => {
                 </div>
               ))}
             </div>
-            <div className="flex mt-6 gap-3">
-              <img src={user.imageUrl} className="w-10 h-10 rounded-full" alt="user-profile" />
+            <div className="flex flex-wrap mt-6 gap-3">
+              <img src={user.imageUrl} className="w-10 h-10 rounded-full cursor-pointer" alt="user-profile" />
               <input
-                className="border-gray-100 outline-none border-2 p-2 rounded-2xl w-72"
+                className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
                 type="text"
                 placeholder="Add a comment"
                 value={comment}
@@ -145,7 +130,7 @@ const PinDetail = () => {
               />
               <button
                 type="button"
-                className="bg-red-500 text-white rounded-full p-2 pl-3 pr-3 font-semibold"
+                className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
                 onClick={addComment}
               >
                 {addingComment ? 'Doing...' : 'Done'}
@@ -162,15 +147,7 @@ const PinDetail = () => {
       {pins ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <div className="flex flex-col justify-center items-center w-full">
-          <Loader
-            type="Circles"
-            color="#00BFFF"
-            height={50}
-            width={200}
-            className="m-5"
-          />
-        </div>
+        <Spineer message="Loading more pins" />
       )}
     </>
   );
