@@ -65,14 +65,14 @@ const PinDetail = () => {
     <>
       {pinDetail && (
         <div className="flex xl:flex-row flex-col m-auto bg-white" style={{ maxWidth: '1500px', borderRadius: '32px' }}>
-          <div className="flex justify-center items-center md:items-start">
+          <div className="flex justify-center items-center md:items-start flex-initial">
             <img
-              className="rounded-t-3xl rounded-b-lg flex flex-initial w-full h-auto w-max-650"
+              className="rounded-t-3xl rounded-b-lg"
               src={(pinDetail?.image && urlFor(pinDetail?.image).url())}
               alt="user-post"
             />
           </div>
-          <div className="w-full p-5">
+          <div className="w-full p-5 flex-1 xl:min-w-620">
             <div className="flex items-center justify-between">
               <div className="flex gap-2 items-center">
                 <button

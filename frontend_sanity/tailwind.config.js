@@ -36,6 +36,7 @@ module.exports = {
       minWidth: {
         210: '210px',
         350: '350px',
+        620: '620px',
       },
       textColor: {
         lightGray: '#F1EFEE',
