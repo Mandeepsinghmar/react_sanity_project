@@ -15,11 +15,7 @@ const SideNavbar = () => {
   return (
     <div className="flex flex-col justify-between bg-white h-screen min-w-210">
       <div className="flex flex-col">
-        <Link to={user ? '/' : '/login'} className="flex px-5 gap-2 mb-10 pt-10 w-190 h-80 items-center">
-          {/* <button type="button" className="bg-red-500 text-white rounded-full p-1 w-8 h-8 font-bold">
-            S
-          </button>
-          <h2 className="font-extrabold text-xl ">ShareMe</h2> */}
+        <Link to={user ? '/' : '/login'} className="flex px-5 gap-2 mb-6 pt-1 w-190 h-80 items-center">
           <img src={logo} alt="logo" className="w-full" />
         </Link>
         <div className="flex flex-col gap-5">

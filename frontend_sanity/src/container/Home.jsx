@@ -9,6 +9,8 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const scrollRef = useRef(null);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
   });
@@ -19,13 +21,10 @@ function Home() {
         <SideNavbar />
       </div>
       <div className="flex md:hidden flex-row">
-        <div className="p-2 mt-2 mb-5 flex flex-row items-center">
+        <div className="p-2 mt-2 pb-5 w-full flex flex-row justify-between items-center">
           <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
-          <Link to="/" className="flex gap-2 ml-3 items-center">
-            <button type="button" className="bg-red-500 text-white rounded-full p-1 w-8 h-8 font-bold">
-              S
-            </button>
-            <h2 className="font-extrabold text-xl ">ShareMe</h2>
+          <Link to={`user-profile/${user?.googleId}`}>
+            <img src={user.imageUrl} alt="user-pic" className="w-9 h-9 rounded-full " />
           </Link>
         </div>
         {toggleSidebar && (
@@ -37,7 +36,7 @@ function Home() {
         </div>
         )}
       </div>
-      <div className="px-5 pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
+      <div className="px-2 md:px-5 pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
         <div className="bg-gray-50">
           <TopNavbar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         </div>
