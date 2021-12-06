@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io';
 
-const TopNavbar = ({ setSearchTerm, searchTerm }) => {
+const TopNavbar = ({ searchTerm, setSearchTerm }) => {
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem('user'));

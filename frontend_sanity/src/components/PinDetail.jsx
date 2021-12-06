@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { IoIosShareAlt } from 'react-icons/io';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
-import Loader from 'react-loader-spinner';
 import { v4 as uuidv4 } from 'uuid';
 
 import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
+import Spineer from './Spinner';
 
 const PinDetail = () => {
   const { pinId } = useParams();
@@ -57,15 +57,7 @@ const PinDetail = () => {
 
   if (!pinDetail) {
     return (
-      <div className="flex flex-col justify-center items-center w-full">
-        <Loader
-          type="Circles"
-          color="#00BFFF"
-          height={50}
-          width={200}
-          className="m-5"
-        />
-      </div>
+      <Spineer message="Showing pin" />
     );
   }
 
@@ -162,15 +154,7 @@ const PinDetail = () => {
       {pins ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <div className="flex flex-col justify-center items-center w-full">
-          <Loader
-            type="Circles"
-            color="#00BFFF"
-            height={50}
-            width={200}
-            className="m-5"
-          />
-        </div>
+        <Spineer message="Loading more pins" />
       )}
     </>
   );

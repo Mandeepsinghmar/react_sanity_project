@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
-import Loader from 'react-loader-spinner';
 
 import { categories } from '../utils/data';
 import { client } from '../client';
+import Spineer from './Spinner';
 
 const CreatePin = () => {
   const [title, setTitle] = useState('');
@@ -89,13 +89,7 @@ const CreatePin = () => {
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
           <div className=" flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
             {loading && (
-              <Loader
-                type="Circles"
-                color="#00BFFF"
-                height={50}
-                width={200}
-                className="m-5"
-              />
+              <Spineer />
             )}
             {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control

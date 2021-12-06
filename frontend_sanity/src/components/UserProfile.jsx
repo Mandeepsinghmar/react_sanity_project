@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login';
-import Loader from 'react-loader-spinner';
 
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
+import Spineer from './Spinner';
 
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
 const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
@@ -16,6 +16,7 @@ const UserProfile = () => {
   const [pins, setPins] = useState();
   const [text, setText] = useState('Created');
   const [activeBtn, setActiveBtn] = useState('created');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const User = JSON.parse(localStorage.getItem('user'));
 
@@ -29,15 +30,18 @@ const UserProfile = () => {
   }, [userId]);
 
   useEffect(() => {
+    setLoading(true);
     if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
       client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
+        setLoading(false);
       });
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
       client.fetch(savedPinsQuery).then((data) => {
         setPins(data);
+        setLoading(false);
       });
     }
   }, [text, userId]);
@@ -49,14 +53,14 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="pb-2">
+    <div className="pb-2 h-full justify-center items-center">
       {user ? (
-        <div className="flex flex-col">
+        <div className="flex flex-col pb-5">
           <div className="relative flex flex-col mb-7">
             <div className="flex flex-col justify-center items-center">
               <img
                 className=" w-full h-370 2xl:h-510 shadow-lg object-cover"
-                src="https://source.unsplash.com/1600x900/?nature,photography,laptop"
+                src="https://source.unsplash.com/1600x900/?nature,photography,technology"
                 alt="user-pic"
               />
               <img
@@ -113,26 +117,18 @@ const UserProfile = () => {
             </button>
           </div>
 
-          <div className="w-full">
-            {pins?.length > 0 ? (
-              <MasonryLayout pins={pins} />
-            ) : (
-              <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
-                No Pins Found!
-              </div>
-            )}
+          {loading && <Spineer message="Finding your pins" /> }
+
+          {!loading && pins && (<MasonryLayout pins={pins} />)}
+
+          {!loading && pins.length === 0 && (
+          <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
+            No Pins Found!
           </div>
+          )}
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center w-full">
-          <Loader
-            type="Circles"
-            color="#00BFFF"
-            height={50}
-            width={200}
-            className="m-5"
-          />
-        </div>
+        <Spineer message="Loading profile" />
       )}
     </div>
   );
