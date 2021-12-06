@@ -46,6 +46,7 @@ module.exports = {
       backgroundColor: {
         mainColor: '#FBF8F9',
         secondaryColor: '#F0F0F0',
+        blackOverlay: 'rgba(0, 0 ,0 ,0.7)',
       },
       keyframes: {
         'slide-in': {
@@ -66,6 +67,9 @@ module.exports = {
     cursor: {
       'zoom-in': 'zoom-in',
       pointer: 'pointer',
+    },
+    left: {
+      '45%': '45%',
     },
   },
   variants: {
