@@ -3,9 +3,9 @@ import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
 import { GoogleLogout } from 'react-google-login';
 
+import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
-import { userCreatedPinsQuery, userQuery, userSavedPinsQuery } from '../utils/data';
 import Spineer from './Spinner';
 
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
@@ -18,9 +18,9 @@ const UserProfile = () => {
   const [activeBtn, setActiveBtn] = useState('created');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const User = JSON.parse(localStorage.getItem('user'));
-
   const { userId } = useParams();
+
+  const User = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const query = userQuery(userId);
@@ -31,14 +31,17 @@ const UserProfile = () => {
 
   useEffect(() => {
     setLoading(true);
+
     if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
+
       client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
         setLoading(false);
       });
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
+
       client.fetch(savedPinsQuery).then((data) => {
         setPins(data);
         setLoading(false);
@@ -51,7 +54,6 @@ const UserProfile = () => {
 
     navigate('/login');
   };
-
   return (
     <div className="pb-2 h-full justify-center items-center">
       {user ? (
@@ -72,7 +74,6 @@ const UserProfile = () => {
             <h1 className="font-bold text-3xl text-center mt-3">
               {user.userName}
             </h1>
-
             <div className="absolute top-0 z-1 right-0 p-2">
               {userId === User.googleId && (
               <GoogleLogout
@@ -93,7 +94,6 @@ const UserProfile = () => {
               )}
             </div>
           </div>
-
           <div className="text-center  mb-7">
             <button
               type="button"

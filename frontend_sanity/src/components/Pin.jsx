@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import { IoIosShareAlt } from 'react-icons/io';
 import { MdDownloadForOffline } from 'react-icons/md';
 import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
@@ -72,15 +71,6 @@ const Pin = ({ pin }) => {
           >
             <div className="flex items-center justify-between">
               <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                  }}
-                  className="bg-white w-9 h-9 p-2 rounded-full flex items-center justify-center text-dark opacity-75 hover:opacity-100 hover:shadow-md outline-none"
-                >
-                  <IoIosShareAlt />
-                </button>
                 <a
                   href={`${image?.asset?.url}?dl=`}
                   download

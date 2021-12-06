@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import { TopNavbar, Feed, Recent, PinDetail, CreatePin, Search } from '../components';
 
-function Pins() {
+const Pins = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -21,6 +22,6 @@ function Pins() {
       </div>
     </div>
   );
-}
+};
 
 export default Pins;

@@ -2,14 +2,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
+
 import { SideNavbar, UserProfile } from '../components';
 import Pins from './Pins';
 
-function Home() {
+const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const scrollRef = useRef(null);
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
 
   useEffect(() => {
     scrollRef.current.scrollTo(0, 0);
@@ -44,6 +46,6 @@ function Home() {
       </div>
     </div>
   );
-}
+};
 
 export default Home;
