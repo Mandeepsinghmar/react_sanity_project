@@ -1,14 +1,20 @@
 import React from 'react';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-
+import Masonry from 'react-masonry-css';
 import Pin from './Pin';
 
+const breakpointColumnsObj = {
+  default: 4,
+  3000: 5,
+  2000: 4,
+  1200: 3,
+  1000: 2,
+  500: 1,
+};
+
 const MasonryLayout = ({ pins }) => (
-  <ResponsiveMasonry columnsCountBreakPoints={{ 750: 2, 900: 3, 1250: 4, 1400: 5, 1500: 6 }}>
-    <Masonry>
-      {pins?.map((pin) => <Pin key={pin._id} pin={pin} className="grid-item" />)}
-    </Masonry>
-  </ResponsiveMasonry>
+  <Masonry className="flex animate-slide-fwd" breakpointCols={breakpointColumnsObj}>
+    {pins?.map((pin) => <Pin key={pin._id} pin={pin} className="w-max" />)}
+  </Masonry>
 );
 
 export default MasonryLayout;
