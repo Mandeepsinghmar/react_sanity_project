@@ -11,15 +11,13 @@ const Feed = () => {
     client.fetch(feedQuery).then((data) => setPins(data));
   }, []);
 
-  if (!pins) {
-    return (
-      <Spineer message="We are adding new ideas to your feed!" />
-    );
-  }
-
   return (
     <div>
-      <MasonryLayout pins={pins} />
+      {pins?.length > 0 ? (
+        <MasonryLayout pins={pins} />
+      ) : (
+        <Spineer message="We are adding new ideas to your feed!" />
+      )}
     </div>
   );
 };

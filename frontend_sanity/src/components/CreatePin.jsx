@@ -41,7 +41,7 @@ const CreatePin = () => {
       title !== ''
       && about !== ''
       && destination !== ''
-      && imageAsset?._id !== ''
+      && imageAsset?._id !== undefined
       && category !== ''
     ) {
       setSavingPin(true);

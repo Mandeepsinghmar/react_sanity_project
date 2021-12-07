@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -94,7 +95,7 @@ const UserProfile = () => {
               )}
             </div>
           </div>
-          <div className="text-center  mb-7">
+          <div className="text-center mb-7">
             <button
               type="button"
               onClick={(e) => {
@@ -117,14 +118,16 @@ const UserProfile = () => {
             </button>
           </div>
 
-          {loading && <Spineer message="Finding your pins" /> }
-
-          {!loading && pins && (<MasonryLayout pins={pins} />)}
-
-          {!loading && pins.length === 0 && (
-          <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
-            No Pins Found!
-          </div>
+          {loading ? (
+            <Spineer message="Finding your pins" />
+          ) : pins.length > 0 ? (
+            <div className="px-2">
+              <MasonryLayout pins={pins} />
+            </div>
+          ) : (
+            <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
+              No Pins Found!
+            </div>
           )}
         </div>
       ) : (
