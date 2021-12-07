@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../client';
 import { recentQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
-import Spineer from './Spinner';
+import Spinner from './Spinner';
 
 const Recent = () => {
   const [pins, setPins] = useState();
@@ -19,7 +19,7 @@ const Recent = () => {
       {pins ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <Spineer message="Showing recent pins" />
+        <Spinner message="Showing recent pins" />
       )}
     </div>
   );

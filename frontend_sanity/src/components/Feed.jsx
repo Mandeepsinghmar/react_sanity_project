@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { client } from '../client';
 import { feedQuery, searchQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
-import Spineer from './Spinner';
+import Spinner from './Spinner';
 
 const Feed = () => {
   const [pins, setPins] = useState();
@@ -24,7 +24,7 @@ const Feed = () => {
       {pins?.length > 0 ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <Spineer message="We are adding new ideas to your feed!" />
+        <Spinner message="We are adding new ideas to your feed!" />
       )}
     </div>
   );

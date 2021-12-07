@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MasonryLayout from './MasonryLayout';
 import { client } from '../client';
 import { categories, searchQuery } from '../utils/data';
-import Spineer from './Spinner';
+import Spinner from './Spinner';
 
 const Search = ({ searchTerm, setSearchTerm }) => {
   const [pins, setPins] = useState();
@@ -36,7 +36,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
           </div>
         ))}
       </div>
-      {loading && <Spineer message="Searching pins" />}
+      {loading && <Spinner message="Searching pins" />}
       {pins?.length !== 0 && <MasonryLayout pins={pins} />}
       {pins?.length === 0 && searchTerm !== '' && !loading && (
         <div className="mt-10 text-center text-xl ">No Pins Found!</div>
