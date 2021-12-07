@@ -119,7 +119,7 @@ const UserProfile = () => {
           </div>
 
           {loading ? (
-            <Spineer message="Finding your pins" />
+            <Spinner message="Finding your pins" />
           ) : pins.length > 0 ? (
             <div className="px-2">
               <MasonryLayout pins={pins} />

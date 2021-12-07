@@ -5,7 +5,7 @@ import { MdDelete } from 'react-icons/md';
 
 import { categories } from '../utils/data';
 import { client } from '../client';
-import Spineer from './Spinner';
+import Spinner from './Spinner';
 
 const CreatePin = () => {
   const [title, setTitle] = useState('');
@@ -89,7 +89,7 @@ const CreatePin = () => {
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
           <div className=" flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
             {loading && (
-              <Spineer />
+              <Spinner />
             )}
             {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control

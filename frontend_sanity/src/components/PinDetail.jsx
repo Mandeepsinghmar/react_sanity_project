@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
-import Spineer from './Spinner';
+import Spinner from './Spinner';
 
 const PinDetail = () => {
   const { pinId } = useParams();
@@ -56,7 +56,7 @@ const PinDetail = () => {
 
   if (!pinDetail) {
     return (
-      <Spineer message="Showing pin" />
+      <Spinner message="Showing pin" />
     );
   }
 
@@ -147,7 +147,7 @@ const PinDetail = () => {
       {pins ? (
         <MasonryLayout pins={pins} />
       ) : (
-        <Spineer message="Loading more pins" />
+        <Spinner message="Loading more pins" />
       )}
     </>
   );

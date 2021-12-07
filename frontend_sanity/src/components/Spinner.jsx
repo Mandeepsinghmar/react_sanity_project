@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from 'react-loader-spinner';
 
-function Spineer({ message }) {
+function Spinner({ message }) {
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
       <Loader
@@ -17,4 +17,4 @@ function Spineer({ message }) {
   );
 }
 
-export default Spineer;
+export default Spinner;

@@ -60,18 +60,7 @@ const Pin = ({ pin }) => {
         onClick={() => navigate(`/pin-detail/${_id}`)}
         className=" relative cursor-zoom-in w-full hover:shadow-lg rounded-lg overflow-hidden transition-all duration-500 ease-in-out"
       >
-        {
-        image
-          ? <img className="rounded-lg w-60 " src={(urlFor(image).width(250).url())} alt="user-post" />
-          : (
-            <img
-              className="rounded-lg w-60 "
-              src="https://cdn.dribbble.com/users/2884238/screenshots/16904345/media/d710408a167d4c05172dd1b28a14f178.png?compress=1&resize=1200x900"
-              alt="user-post"
-            />
-          )
-
-      }
+        <img className="rounded-lg w-60 " src={(urlFor(image).width(250).url())} alt="user-post" />
         {postHovered && (
           <div
             className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50"
