@@ -1,14 +1,12 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { AiFillClockCircle } from 'react-icons/ai';
 import { RiHomeFill } from 'react-icons/ri';
-import { BiLogInCircle } from 'react-icons/bi';
 import { IoIosArrowForward } from 'react-icons/io';
 import logo from '../assets/logo.svg';
 import { categories } from '../utils/data';
 
-const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 transition-all duration-200 ease-in-out';
-const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out ';
+const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 transition-all duration-200 ease-in-out capitalize';
+const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transition-all duration-200 ease-in-out capitalize';
 
 const SideNavbar = () => {
   const user = JSON.parse(localStorage.getItem('user'));
@@ -20,29 +18,19 @@ const SideNavbar = () => {
           <img src={logo} alt="logo" className="w-full" />
         </Link>
         <div className="flex flex-col gap-5">
-          {user ? (
-            <>
-              <NavLink to="/" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
-                <RiHomeFill />
-                Home
-              </NavLink>
-              <NavLink to="/recent" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
-                <AiFillClockCircle />
-                Recent
-              </NavLink>
-            </>
-          ) : (
-            <NavLink to="/login" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
-              <BiLogInCircle />
-              Login
-            </NavLink>
-          )}
-          {/* {categories.slice(0, categories.length - 1).map((category) => (
-            <NavLink to="/category" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
-              <IoIosArrowForward />
+
+          <NavLink to="/" className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
+            <RiHomeFill />
+            Home
+          </NavLink>
+          <h3 className="ml-4 text-xl">Discover cateogries</h3>
+          {categories.slice(0, categories.length - 1).map((category) => (
+            <NavLink to={`/category/${category.name}`} className={({ isActive }) => (isActive ? isActiveStyle : isNotActiveStyle)}>
+              {/* <IoIosArrowForward /> */}
+              <img src={category.image} className="w-8 h-8 rounded" />
               {category.name}
             </NavLink>
-          ))} */}
+          ))}
         </div>
       </div>
       {user && (

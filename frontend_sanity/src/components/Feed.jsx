@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router';
 
 import { client } from '../client';
-import { feedQuery } from '../utils/data';
+import { feedQuery, searchQuery } from '../utils/data';
 import MasonryLayout from './MasonryLayout';
 import Spineer from './Spinner';
 
 const Feed = () => {
   const [pins, setPins] = useState();
+  const { categoryId } = useParams();
+  console.log(categoryId);
   useEffect(() => {
-    client.fetch(feedQuery).then((data) => setPins(data));
-  }, []);
+    if (categoryId) {
+      const query = searchQuery(categoryId);
+      client.fetch(query).then((data) => setPins(data));
+    } else {
+      client.fetch(feedQuery).then((data) => setPins(data));
+    }
+  }, [categoryId]);
 
   return (
     <div>
