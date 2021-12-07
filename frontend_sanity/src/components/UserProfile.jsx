@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { AiOutlineLogout } from 'react-icons/ai';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -17,7 +16,6 @@ const UserProfile = () => {
   const [pins, setPins] = useState();
   const [text, setText] = useState('Created');
   const [activeBtn, setActiveBtn] = useState('created');
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { userId } = useParams();
 
@@ -31,21 +29,17 @@ const UserProfile = () => {
   }, [userId]);
 
   useEffect(() => {
-    setLoading(true);
-
     if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
 
       client.fetch(createdPinsQuery).then((data) => {
         setPins(data);
-        setLoading(false);
       });
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
 
       client.fetch(savedPinsQuery).then((data) => {
         setPins(data);
-        setLoading(false);
       });
     }
   }, [text, userId]);
@@ -56,7 +50,7 @@ const UserProfile = () => {
     navigate('/login');
   };
   return (
-    <div className="pb-2 h-full justify-center items-center">
+    <div className="relative pb-2 h-full justify-center items-center">
       {user ? (
         <div className="flex flex-col pb-5">
           <div className="relative flex flex-col mb-7">
@@ -118,13 +112,11 @@ const UserProfile = () => {
             </button>
           </div>
 
-          {loading ? (
-            <Spinner message="Finding your pins" />
-          ) : pins.length > 0 ? (
-            <div className="px-2">
-              <MasonryLayout pins={pins} />
-            </div>
-          ) : (
+          <div className="px-2">
+            <MasonryLayout pins={pins} />
+          </div>
+
+          {pins?.length === 0 && (
             <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
               No Pins Found!
             </div>
