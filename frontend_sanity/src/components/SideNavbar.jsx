@@ -21,7 +21,7 @@ const SideNavbar = ({ closeToggle }) => {
     <div className="flex flex-col justify-between bg-white h-screen overflow-y-scroll min-w-210 hide-scrollbar">
       <div className="flex flex-col">
         <Link
-          to={user ? '/' : '/login'}
+          to="/"
           className="flex px-5 gap-2 my-6 pt-1 w-190 items-center"
           onClick={handleCloseSideBar}
         >
@@ -45,7 +45,6 @@ const SideNavbar = ({ closeToggle }) => {
               onClick={handleCloseSideBar}
               key={category.name}
             >
-              {/* <IoIosArrowForward /> */}
               <img src={category.image} className="w-8 h-8 rounded-full shadow-sm" />
               {category.name}
             </NavLink>

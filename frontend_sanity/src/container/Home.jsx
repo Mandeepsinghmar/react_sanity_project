@@ -5,6 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 import { SideNavbar, UserProfile } from '../components';
 import Pins from './Pins';
+import logo from '../assets/logo.svg';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -25,6 +26,9 @@ const Home = () => {
       <div className="flex md:hidden flex-row">
         <div className="p-2 w-full flex flex-row justify-between items-center shadow-md">
           <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
+          <Link to="/">
+            <img src={logo} alt="logo" className="w-28" />
+          </Link>
           <Link to={`user-profile/${user?.googleId}`}>
             <img src={user.imageUrl} alt="user-pic" className="w-9 h-9 rounded-full " />
           </Link>
