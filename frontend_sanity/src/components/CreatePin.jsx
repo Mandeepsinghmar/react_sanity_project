@@ -67,7 +67,7 @@ const CreatePin = ({ user }) => {
         userId: user.googleId,
         postedBy: {
           _type: 'postedBy',
-          _ref: user.googleId,
+          _ref: user._id,
         },
         category,
       };
