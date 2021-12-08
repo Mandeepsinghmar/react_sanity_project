@@ -10,7 +10,7 @@ const Feed = () => {
   const [pins, setPins] = useState();
   const [loading, setLoading] = useState(false);
   const { categoryId } = useParams();
-  console.log(categoryId);
+
   useEffect(() => {
     if (categoryId) {
       setLoading(true);

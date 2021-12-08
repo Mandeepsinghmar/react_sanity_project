@@ -8,14 +8,12 @@ import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
 import Spinner from './Spinner';
 
-const PinDetail = () => {
+const PinDetail = ({ user }) => {
   const { pinId } = useParams();
   const [pins, setPins] = useState();
   const [pinDetail, setPinDetail] = useState();
   const [comment, setComment] = useState('');
   const [addingComment, setAddingComment] = useState(false);
-
-  const user = JSON.parse(localStorage.getItem('user'));
 
   const fetchPinDetails = () => {
     const query = pinDetailQuery(pinId);
@@ -100,27 +98,22 @@ const PinDetail = () => {
             <div className="max-h-370 overflow-y-auto">
               {pinDetail?.comments?.map((item) => (
                 <div className="flex gap-2 mt-5 items-center bg-white rounded-lg" key={item.comment}>
-                  {/* TODO: What's wrong with this?
-                  Cannot read property 'value' of null - due to linting
-                  */}
-                  {/* <Link to={`/user-profile/${item?.postedBy?._id}`}> */}
                   <img
                     src={item.postedBy?.image}
                     className="w-10 h-10 rounded-full cursor-pointer"
                     alt="user-profile"
                   />
-                  {/* </Link> */}
                   <div className="flex flex-col">
-                    {/* <Link to={`/user-profile/${item?.postedBy?._id}`}> */}
                     <p className="font-bold">{item.postedBy?.userName}</p>
-                    {/* </Link> */}
                     <p>{item.comment}</p>
                   </div>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap mt-6 gap-3">
-              <img src={user.imageUrl} className="w-10 h-10 rounded-full cursor-pointer" alt="user-profile" />
+              <Link to={`/user-profile/${user._id}`}>
+                <img src={user.image} className="w-10 h-10 rounded-full cursor-pointer" alt="user-profile" />
+              </Link>
               <input
                 className=" flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300"
                 type="text"

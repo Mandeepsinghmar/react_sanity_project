@@ -11,13 +11,12 @@ const Login = () => {
   const navigate = useNavigate();
   const responseGoogle = (response) => {
     localStorage.setItem('user', JSON.stringify(response.profileObj));
-    const { name, googleId, imageUrl, givenName, familyName } = response.profileObj;
+    const { name, googleId, imageUrl } = response.profileObj;
     const doc = {
       _id: googleId,
       _type: 'user',
       userName: name,
       image: imageUrl,
-      slug: `${givenName}-${familyName}`,
     };
     client.createIfNotExists(doc).then(() => {
       navigate('/', { replace: true });

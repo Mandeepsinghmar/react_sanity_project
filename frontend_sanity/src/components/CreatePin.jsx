@@ -7,7 +7,7 @@ import { categories } from '../utils/data';
 import { client } from '../client';
 import Spinner from './Spinner';
 
-const CreatePin = () => {
+const CreatePin = ({ user }) => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState();
@@ -16,24 +16,30 @@ const CreatePin = () => {
   const [category, setCategory] = useState();
   const [savingPin, setSavingPin] = useState(false);
   const [imageAsset, setImageAsset] = useState();
+  const [wrongImageType, setWrongImageType] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem('user'));
   const navigate = useNavigate();
 
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
-    setLoading(true);
     // uploading asset to sanity
-    client.assets
-      .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
-      .then((document) => {
-        setImageAsset(document);
-        console.log('The image was uploaded!', document);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Upload failed:', error.message);
-      });
+    if (selectedFile.type === 'image/png' || selectedFile.type === 'image/svg' || selectedFile.type === 'image/jpeg' || selectedFile.type === 'image/gif' || selectedFile.type === 'image/tiff') {
+      setWrongImageType(false);
+      setLoading(true);
+      client.assets
+        .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
+        .then((document) => {
+          setImageAsset(document);
+          // console.log('The image was uploaded!', document);
+          setLoading(false);
+        })
+        .catch((error) => {
+          // console.error('Upload failed:', error.message);
+        });
+    } else {
+      setLoading(false);
+      setWrongImageType(true);
+    }
   };
 
   const savePin = () => {
@@ -91,6 +97,11 @@ const CreatePin = () => {
             {loading && (
               <Spinner />
             )}
+            {
+              wrongImageType && (
+                <p>It's wrong file type.</p>
+              )
+            }
             {!imageAsset ? (
               // eslint-disable-next-line jsx-a11y/label-has-associated-control
               <label>
@@ -103,7 +114,7 @@ const CreatePin = () => {
                   </div>
 
                   <p className="mt-32 text-gray-400">
-                    Recommendation: Use high-quality .jpg less than 20MB
+                    Recommendation: Use high-quality JPG, JPEG, SVG, PNG, GIF or TIFF less than 20MB
                   </p>
                 </div>
                 <input
@@ -140,14 +151,18 @@ const CreatePin = () => {
             placeholder="Add your title"
             className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
           />
-          <div className="flex gap-2 mt-2 mb-2 items-center bg-white rounded-lg ">
-            <img
-              src={user.imageUrl}
-              className="w-10 h-10 rounded-full"
-              alt="user-profile"
-            />
-            <p className="font-bold">{user.name}</p>
-          </div>
+          {
+           user && (
+           <div className="flex gap-2 mt-2 mb-2 items-center bg-white rounded-lg ">
+             <img
+               src={user.image}
+               className="w-10 h-10 rounded-full"
+               alt="user-profile"
+             />
+             <p className="font-bold">{user.userName}</p>
+           </div>
+           )
+         }
           <input
             type="text"
             value={about}

@@ -161,7 +161,7 @@ export const recentQuery = `*[_type == "pin"][0...10]{
     }`;
 
 export const searchQuery = (searchTerm) => {
-  const query = `*[_type == "pin" && category == '${searchTerm}']{
+  const query = `*[_type == "pin" && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
         image{
           asset->{
             url
