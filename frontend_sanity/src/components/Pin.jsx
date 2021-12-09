@@ -15,7 +15,7 @@ const Pin = ({ pin }) => {
 
   const { postedBy, image, _id, destination } = pin;
 
-  const user = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
+  const user = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : {};
 
   const deletePin = (id) => {
     client
