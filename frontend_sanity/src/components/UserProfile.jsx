@@ -19,7 +19,7 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
 
-  const User = JSON.parse(localStorage.getItem('user'));
+  const User = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
 
   useEffect(() => {
     const query = userQuery(userId);

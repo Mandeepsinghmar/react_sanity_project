@@ -8,7 +8,7 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const User = JSON.parse(localStorage.getItem('user'));
+    const User = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
 
     if (!User) navigate('/login');
   }, []);

@@ -14,7 +14,8 @@ const Home = () => {
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
 
-  const userInfo = JSON.parse(localStorage.getItem('user') || '{}');
+  const userInfo = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {};
+
   useEffect(() => {
     const query = userQuery(userInfo.googleId);
     client.fetch(query).then((data) => {
