@@ -7,7 +7,7 @@ import { categories } from '../utils/data';
 import { client } from '../client';
 import Spinner from './Spinner';
 
-const CreatePin = ({ user }) => {
+const CreatePin = () => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [destination, setDestination] = useState();
@@ -19,6 +19,8 @@ const CreatePin = ({ user }) => {
   const [wrongImageType, setWrongImageType] = useState(false);
 
   const navigate = useNavigate();
+
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const uploadImage = (e) => {
     const selectedFile = e.target.files[0];
@@ -67,7 +69,7 @@ const CreatePin = ({ user }) => {
         userId: user.googleId,
         postedBy: {
           _type: 'postedBy',
-          _ref: user._id,
+          _ref: user.googleId,
         },
         category,
       };
@@ -151,18 +153,7 @@ const CreatePin = ({ user }) => {
             placeholder="Add your title"
             className="outline-none text-2xl sm:text-3xl font-bold border-b-2 border-gray-200 p-2"
           />
-          {
-           user && (
-           <div className="flex gap-2 mt-2 mb-2 items-center bg-white rounded-lg ">
-             <img
-               src={user.image}
-               className="w-10 h-10 rounded-full"
-               alt="user-profile"
-             />
-             <p className="font-bold">{user.userName}</p>
-           </div>
-           )
-         }
+
           <input
             type="text"
             value={about}
