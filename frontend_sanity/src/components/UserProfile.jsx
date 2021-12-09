@@ -27,6 +27,7 @@ const UserProfile = () => {
       setUser(data[0]);
     });
   }, [userId]);
+  console.log(user);
 
   useEffect(() => {
     if (text === 'Created') {
