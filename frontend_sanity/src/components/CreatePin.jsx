@@ -34,7 +34,7 @@ const CreatePin = ({ user }) => {
           setLoading(false);
         })
         .catch((error) => {
-          // console.error('Upload failed:', error.message);
+          console.log('Upload failed:', error.message);
         });
     } else {
       setLoading(false);
@@ -99,7 +99,7 @@ const CreatePin = ({ user }) => {
             )}
             {
               wrongImageType && (
-                <p>It's wrong file type.</p>
+                <p>It&apos;s wrong file type.</p>
               )
             }
             {!imageAsset ? (
