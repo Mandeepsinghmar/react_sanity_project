@@ -46,7 +46,7 @@ const Home = () => {
           <div className="absolute w-full flex justify-end items-center p-2">
             <AiFillCloseCircle fontSize={30} className="cursor-pointer" onClick={() => setToggleSidebar(false)} />
           </div>
-          <SideNavbar closeToggle={setToggleSidebar} user={user} />
+          <SideNavbar closeToggle={setToggleSidebar} user={user && user} />
         </div>
         )}
       </div>
