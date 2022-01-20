@@ -109,17 +109,18 @@ const Pin = ({ pin }) => {
                 </a>
               ) : undefined}
               {
-           postedBy?._id === user.googleId && (
-           <button
-             type="button"
-             onClick={(e) => {
-               e.stopPropagation();
-               deletePin(_id);
-             }}
-             className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
-           >
-             <AiTwotoneDelete />
-           </button>
+           postedBy?._id === user.googleId
+           && (
+             <button
+               type="button"
+               onClick={(e) => {
+                 e.stopPropagation();
+                 deletePin(_id);
+               }}
+               className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
+             >
+               <AiTwotoneDelete />
+             </button>
            )
         }
             </div>
