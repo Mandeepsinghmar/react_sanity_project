@@ -4,8 +4,8 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { Link, Route, Routes } from 'react-router-dom';
 
 import { SideNavbar, UserProfile } from '../components';
-import { client } from '../client';
 import { userQuery } from '../utils/data';
+import { client } from '../client';
 import Pins from './Pins';
 import logo from '../assets/logo.svg';
 
